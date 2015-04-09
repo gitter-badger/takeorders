@@ -1,4 +1,4 @@
-Takes orders
+Take orders
 ------------
 
 ### Build
