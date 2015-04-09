@@ -1,27 +1,64 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 
 //var view = require('./views/view.jsx'); // need to specify the jsx extension
 
 var hello = require('./views/landing.jsx');
 
-
-
 React.render(hello(), document.getElementById('content'));
 
 },{"./views/landing.jsx":2,"react":158}],2:[function(require,module,exports){
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 var React = require('react');
 
-var MyView = React.createClass({displayName: "MyView",
-  render: function(){
-    return (
-      React.createElement("div", null, 
-      	React.createElement("p", null, "Coming soon")
+var Landing = (function () {
+  function Landing(name) {
+    _classCallCheck(this, Landing);
+
+    this.name = name;
+  }
+
+  _createClass(Landing, [{
+    key: 'hello',
+    value: function hello() {
+      return 'Hello, ' + this.name;
+    }
+  }], [{
+    key: 'helloForConsole',
+    value: function helloForConsole() {
+      return console.log('Hello =) ');
+    }
+  }]);
+
+  return Landing;
+})();
+
+var MyView = React.createClass({
+  displayName: 'MyView',
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'p',
+        null,
+        'Coming soon'
       )
     );
   }
 });
 
+var testBabel = new Landing('fruta');
+
+Landing.helloForConsole();
 
 module.exports = React.createFactory(MyView);
 
