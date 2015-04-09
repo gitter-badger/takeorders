@@ -1,10 +1,17 @@
 Takes orders
 ------------
 
+### Build
+
+You need Gulp installed globally:
+
+```sh
+$ gulp
+```
+
 
 ### Start
 
-You need Gulp installed globally:
 
 ```sh
 $ npm start
