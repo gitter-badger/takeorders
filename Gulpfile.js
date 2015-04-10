@@ -7,17 +7,16 @@ var babelify = require("babelify");
 
 gulp.task('browserify', function(){
   var b = browserify();
-  b.transform(babelify); // use the reactify transform
+  b.transform(babelify); 
   b.add('./client/main.js');
   return b.bundle()
     .pipe(source('main.js'))
     .pipe(gulp.dest('./public/js'));
 });
 
-gulp.task('babel', function () {
-    return gulp.src('src/app.js')
-        .pipe(babel())
-        .pipe(gulp.dest('dist'));
+
+gulp.task('watch', function () {
+  gulp.watch('./client/**/*.jsx', ['browserify']);
 });
 
 gulp.task('default', ['browserify']);

@@ -25,3 +25,4 @@ You need Mocha installed globally:
 ```sh
 $ npm test
 ```
+
