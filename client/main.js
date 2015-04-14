@@ -1,9 +1,14 @@
 var React = require('react');
 var request = require('superagent');
+var page = require('page');
 
-var hello = require('./views/landing.jsx');
+page('/', function () {
+	var hello = require('./views/landing.jsx');
+	React.render(hello(), document.getElementById('content'));
+})
 
-React.render(hello(), document.getElementById('content'));
+
+page.start()
 
 var server = require('./lib/auth.js');
 
