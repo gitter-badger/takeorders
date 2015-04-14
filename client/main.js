@@ -7,10 +7,17 @@ page('/', function () {
 	React.render(hello(), document.getElementById('content'));
 })
 
-page('/otravista', function () {
+page('/otravista/', function () {
 	var otra = require('./views/otra.jsx');
-	React.render(otra({saludo: 'Holaaaaaaaa'}), document.getElementById('content'));
+	React.render(otra({saludo: 'Hola manola'}), document.getElementById('content'));
 })
+
+page('/otravista/:algo', function (ctx) {
+	var otra = require('./views/otra.jsx');
+	React.render(otra({saludo: ctx.params.algo || 'Hola manola'}), document.getElementById('content'));
+})
+
+
 
 page.start()
 

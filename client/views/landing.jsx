@@ -10,7 +10,7 @@ var MyView = React.createClass({
           <h4>Login</h4>
         </div>
         <FormLogin />
-        <a href="/otravista">Ir a otra vista</a>
+        <a href="/otravista/sarasa">Ir a otra vista</a>
       </div>
    
     );
