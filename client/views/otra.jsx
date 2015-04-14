@@ -1,16 +1,13 @@
 var React = require('react');
 
-var FormLogin = require('../components/form-login.jsx');
-
 var MyView = React.createClass({
   render: function(){
     return (
       <div className="row">
         <div className="six columns">
-          <h4>Login</h4>
+          <h4>Soy otra vista</h4>
+          <p>{this.props.saludo}</p>
         </div>
-        <FormLogin />
-        <a href="/otravista">Ir a otra vista</a>
       </div>
    
     );

@@ -7,6 +7,10 @@ page('/', function () {
 	React.render(hello(), document.getElementById('content'));
 })
 
+page('/otravista', function () {
+	var otra = require('./views/otra.jsx');
+	React.render(otra({saludo: 'Holaaaaaaaa'}), document.getElementById('content'));
+})
 
 page.start()
 
