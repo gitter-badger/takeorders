@@ -4,14 +4,12 @@
 var React = require('react');
 var request = require('superagent');
 
-//var view = require('./views/view.jsx'); // need to specify the jsx extension
-
 var hello = require('./views/landing.jsx');
 
 React.render(hello(), document.getElementById('content'));
 
 request.get('http://snapi.aws.af.cm/informante').end(function (err, res) {
-	console.log(res);
+	console.log(res.body);
 	console.log(err);
 });
 
@@ -22,6 +20,16 @@ var React = require("react");
 
 var formLogin = React.createClass({
 	displayName: "formLogin",
+
+	getInitialState: function getInitialState() {
+		return {
+			counter: 0
+		};
+	},
+
+	increment: function increment() {
+		this.setState({ counter: this.state.counter + 1 });
+	},
 
 	render: function render() {
 		return React.createElement(
@@ -55,6 +63,20 @@ var formLogin = React.createClass({
 					{ className: "row" },
 					React.createElement("input", { "class": "button-primary", type: "submit", value: "Submit" })
 				)
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"h2",
+					null,
+					this.state.counter
+				)
+			),
+			React.createElement(
+				"button",
+				{ onClick: this.increment },
+				"Increment!"
 			)
 		);
 	}

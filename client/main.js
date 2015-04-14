@@ -6,9 +6,8 @@ var hello = require('./views/landing.jsx');
 React.render(hello(), document.getElementById('content'));
 
 request
-	.post('/login')
-	.send(data)
+	.get('http://snapi.aws.af.cm/informante')
 	.end(function(err, res){
-	   console.log(res)
+	   console.log(res.body)
 	   console.log(err)
 	});

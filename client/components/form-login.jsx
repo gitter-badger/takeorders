@@ -1,6 +1,17 @@
 var React = require('react');
 
 var formLogin = React.createClass({
+
+	getInitialState: function () {
+	    return {
+	        counter: 0  
+	    };
+	},
+
+	increment: function () {
+		this.setState({counter: this.state.counter + 1 })
+	},
+
 	render: function(){
 		return (
 			<div className="six columns">
@@ -16,9 +27,13 @@ var formLogin = React.createClass({
 					<div className="row">
 						<input class="button-primary" type="submit" value="Submit" />
 					</div>
-				</form>
-			</div>
 
+				</form>
+				<div>
+					<h2>{this.state.counter}</h2>
+				</div>
+				<button onClick={this.increment}>Increment!</button>
+			</div>
 			);
 	}
 });
