@@ -5,9 +5,12 @@ var hello = require('./views/landing.jsx');
 
 React.render(hello(), document.getElementById('content'));
 
-request
-	.get('http://snapi.aws.af.cm/informante')
-	.end(function(err, res){
-	   console.log(res.body)
-	   console.log(err)
-	});
+var server = require('./lib/auth.js');
+
+server.get('/auth', function (err, data) {
+	if (err) {
+		consol.log(err)
+	}
+	console.log(data)
+});
+
