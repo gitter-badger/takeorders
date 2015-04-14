@@ -17,6 +17,8 @@ server.get('/auth', function (err, data) {
 	console.log(data);
 });
 
+server.auth('Andres', 'Atencio');
+
 },{"./lib/auth.js":3,"./views/landing.jsx":4,"react":160,"superagent":162}],2:[function(require,module,exports){
 "use strict";
 
@@ -96,8 +98,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var request = require('superagent');
+var superAgentAuth = require('superagent-auth-bearer');
 
-require('superagent-auth-bearer')(request);
+superAgentAuth(request);
 
 var Server = (function () {
 	function Server() {
@@ -109,11 +112,16 @@ var Server = (function () {
 		value: function get(url, cb) {
 			request.get(url).authBearer('Sarasa').end(function (err, res) {
 				if (err) {
-					console.log('err --------');
 					cb(err);
 				}
-				console.log('res -------');
 				cb(null, res);
+			});
+		}
+	}, {
+		key: 'auth',
+		value: function auth(email, pass) {
+			request.post('/login').send({ email: email, pass: pass }).end(function (err, res) {
+				console.log(res.body);
 			});
 		}
 	}]);

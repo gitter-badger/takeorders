@@ -12,4 +12,8 @@ router.get('/auth', function (req, res) {
 	res.sendStatus(200)
 });
 
+router.post('/login', function (req, res) {
+	res.send({email:req.body.email, pass:req.body.pass})
+})
+
 module.exports = router;

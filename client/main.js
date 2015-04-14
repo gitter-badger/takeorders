@@ -14,3 +14,5 @@ server.get('/auth', function (err, data) {
 	console.log(data)
 });
 
+server.auth('Andres', 'Atencio')
+
