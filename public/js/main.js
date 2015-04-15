@@ -22,18 +22,7 @@ page('/otravista/:algo', function (ctx) {
 
 page.start();
 
-var server = require('./libs/auth.js');
-
-server.get('/auth', function (err, data) {
-	if (err) {
-		consol.log(err);
-	}
-	console.log(data);
-});
-
-server.auth('Andres', 'Atencio');
-
-},{"./libs/auth.js":3,"./pages/landing.jsx":4,"./pages/otra.jsx":5,"page":7,"react":164,"superagent":166}],2:[function(require,module,exports){
+},{"./pages/landing.jsx":4,"./pages/otra.jsx":5,"page":7,"react":164,"superagent":166}],2:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -44,19 +33,25 @@ var formLogin = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			email: 'Andres',
+			email: '',
 			pass: ''
 		};
 	},
 
-	handleChange: function handleChange(event) {
+	handleInputEmail: function handleInputEmail(event) {
 
 		this.setState({ email: event.target.value });
-		console.log('inuput -----> ');
-		console.log(event);
 	},
 
-	login: function login() {},
+	handleInputPass: function handleInputPass(event) {
+
+		this.setState({ pass: event.target.value });
+	},
+
+	login: function login(event) {
+		event.preventDefault();
+		Server.auth(this.state.email, this.state.pass);
+	},
 
 	render: function render() {
 		return React.createElement(
@@ -73,7 +68,7 @@ var formLogin = React.createClass({
 						{ 'for': 'email' },
 						'Your email'
 					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', name: 'email', value: this.state.email, onChange: this.handleChange })
+					React.createElement('input', { 'class': 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', value: this.state.email, onChange: this.handleInputEmail })
 				),
 				React.createElement(
 					'div',
@@ -83,12 +78,16 @@ var formLogin = React.createClass({
 						{ 'for': 'email' },
 						'Password'
 					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'password', id: 'pass' })
+					React.createElement('input', { 'class': 'u-full-width', type: 'password', value: this.state.pass, onChange: this.handleInputPass })
 				),
 				React.createElement(
 					'div',
 					{ className: 'row' },
-					React.createElement('input', { 'class': 'button-primary', type: 'submit', value: 'Submit' })
+					React.createElement(
+						'button',
+						{ onClick: this.login },
+						'Ingresar'
+					)
 				)
 			),
 			React.createElement(

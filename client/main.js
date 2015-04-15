@@ -21,14 +21,4 @@ page('/otravista/:algo', function (ctx) {
 
 page.start()
 
-var server = require('./libs/auth.js');
-
-server.get('/auth', function (err, data) {
-	if (err) {
-		consol.log(err)
-	}
-	console.log(data)
-});
-
-server.auth('Andres', 'Atencio')
 

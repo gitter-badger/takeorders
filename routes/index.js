@@ -13,6 +13,7 @@ router.get('/auth', function (req, res) {
 });
 
 router.post('/login', function (req, res) {
+	console.log(req.body)
 	res.send({email:req.body.email, pass:req.body.pass})
 })
 

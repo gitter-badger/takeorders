@@ -5,21 +5,27 @@ var formLogin = React.createClass({
 
 	getInitialState: function () {
 	    return {
-	        email: 'Andres',
+	        email: '',
 	        pass: ''  
 	    };
 	},
 
-	handleChange: function (event) {
+	handleInputEmail: function (event) {
 		
 		this.setState({email: event.target.value})
-		console.log('inuput -----> ')
-		console.log(event)
+
 	},
 
-	login: function () {
+	handleInputPass: function (event) {
 		
-		
+		this.setState({pass: event.target.value})
+
+	},
+
+	login: function (event) {
+		event.preventDefault();
+		Server.auth(this.state.email, this.state.pass);
+
 	},
 
 	render: function(){
@@ -28,18 +34,19 @@ var formLogin = React.createClass({
 				<form>
 					<div className="row">
 						<label for="email">Your email</label>
-						<input class="u-full-width" type="email" placeholder="test@mailbox.com" name="email" value={this.state.email} onChange={this.handleChange} />
+						<input class="u-full-width" type="email" placeholder="test@mailbox.com" value={this.state.email} onChange={this.handleInputEmail} />
 					</div>
 					<div className="row">
 						<label for="email">Password</label>
-						<input class="u-full-width" type="password" id="pass" />
+						<input class="u-full-width" type="password" value={this.state.pass} onChange={this.handleInputPass} />
 					</div>
 					<div className="row">
-						<input class="button-primary" type="submit" value="Submit" />
+						<button onClick={this.login}>Ingresar</button>
 					</div>
 
 				</form>
 				<div>
+					
 					<h2>{this.state.email}</h2>
 				</div>
 			</div>
