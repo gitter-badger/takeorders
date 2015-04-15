@@ -4,13 +4,11 @@
 var React = require('react');
 var request = require('superagent');
 
-//var view = require('./views/view.jsx'); // need to specify the jsx extension
-
 var hello = require('./views/landing.jsx');
 
 React.render(hello(), document.getElementById('content'));
 
-request.get('http://snapi.aws.af.cm/informante').end(function (err, res) {
+request.post('/login').send(data).end(function (err, res) {
 	console.log(res);
 	console.log(err);
 });
@@ -25,36 +23,32 @@ var formLogin = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-			"div",
-			{ className: "six columns" },
+			"form",
+			{ className: "login-form" },
 			React.createElement(
-				"form",
+				"div",
 				null,
 				React.createElement(
-					"div",
-					{ className: "row" },
-					React.createElement(
-						"label",
-						{ "for": "email" },
-						"Your email"
-					),
-					React.createElement("input", { "class": "u-full-width", type: "email", placeholder: "test@mailbox.com", id: "email" })
+					"label",
+					{ htmlFor: "email" },
+					"Your email"
 				),
+				React.createElement("input", { className: "u-full-width", type: "email", placeholder: "test@mailbox.com", id: "email" })
+			),
+			React.createElement(
+				"div",
+				null,
 				React.createElement(
-					"div",
-					{ className: "row" },
-					React.createElement(
-						"label",
-						{ "for": "email" },
-						"Password"
-					),
-					React.createElement("input", { "class": "u-full-width", type: "password", id: "pass" })
+					"label",
+					{ htmlFor: "pass" },
+					"Password"
 				),
-				React.createElement(
-					"div",
-					{ className: "row" },
-					React.createElement("input", { "class": "button-primary", type: "submit", value: "Submit" })
-				)
+				React.createElement("input", { className: "u-full-width", type: "password", id: "pass" })
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement("input", { className: "button-primary", type: "submit", value: "Submit" })
 			)
 		);
 	}
@@ -75,15 +69,11 @@ var MyView = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'row' },
+      { className: 'four columns login-form' },
       React.createElement(
-        'div',
-        { className: 'six columns' },
-        React.createElement(
-          'h4',
-          null,
-          'Login'
-        )
+        'h4',
+        null,
+        'Login'
       ),
       React.createElement(FormLogin, null)
     );
@@ -91,6 +81,8 @@ var MyView = React.createClass({
 });
 
 module.exports = React.createFactory(MyView);
+
+React.createElement('div', { className: true });
 
 },{"../components/form-login.jsx":2,"react":159}],4:[function(require,module,exports){
 // shim for using process in browser

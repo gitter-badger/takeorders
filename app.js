@@ -56,3 +56,9 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+return {
+    log: function(what) {
+        console.log(what);
+    }
+}
