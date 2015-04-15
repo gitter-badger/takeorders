@@ -1,6 +1,33 @@
 var React = require('react');
+var Server = require('../libs/auth.js')
 
 var formLogin = React.createClass({
+
+	getInitialState: function () {
+	    return {
+	        email: '',
+	        pass: ''  
+	    };
+	},
+
+	handleInputEmail: function (event) {
+		
+		this.setState({email: event.target.value})
+
+	},
+
+	handleInputPass: function (event) {
+		
+		this.setState({pass: event.target.value})
+
+	},
+
+	login: function (event) {
+		event.preventDefault();
+		Server.auth(this.state.email, this.state.pass);
+
+	},
+
 	render: function(){
 		return (
 			<form className="login-form">

@@ -8,6 +8,7 @@ var MyView = React.createClass({
       <div className="four columns login-form">
         <h4>Login</h4>
         <FormLogin />
+        <a href="/otravista/sarasa">Ir a otra vista</a>
       </div>
     );
   }
