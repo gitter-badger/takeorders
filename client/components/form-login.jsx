@@ -1,25 +1,34 @@
 var React = require('react');
+var Server = require('../libs/auth.js')
 
 var formLogin = React.createClass({
 
 	getInitialState: function () {
 	    return {
-	        counter: 0  
+	        email: 'Andres',
+	        pass: ''  
 	    };
 	},
 
-	increment: function () {
-		this.setState({counter: this.state.counter + 1 })
-	
+	handleChange: function (event) {
+		
+		this.setState({email: event.target.value})
+		console.log('inuput -----> ')
+		console.log(event)
+	},
+
+	login: function () {
+		
+		
 	},
 
 	render: function(){
 		return (
-			<div className="six columns">
+			<div className="eight columns">
 				<form>
 					<div className="row">
 						<label for="email">Your email</label>
-						<input class="u-full-width" type="email" placeholder="test@mailbox.com" id="email" />
+						<input class="u-full-width" type="email" placeholder="test@mailbox.com" name="email" value={this.state.email} onChange={this.handleChange} />
 					</div>
 					<div className="row">
 						<label for="email">Password</label>
@@ -31,9 +40,8 @@ var formLogin = React.createClass({
 
 				</form>
 				<div>
-					<h2>{this.state.counter}</h2>
+					<h2>{this.state.email}</h2>
 				</div>
-				<button onClick={this.increment}>Increment!</button>
 			</div>
 			);
 	}

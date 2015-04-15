@@ -6,7 +6,7 @@ var MyView = React.createClass({
   render: function(){
     return (
       <div className="row">
-        <div className="six columns">
+        <div className="four columns">
           <h4>Login</h4>
         </div>
         <FormLogin />

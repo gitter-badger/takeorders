@@ -6,23 +6,23 @@ var request = require('superagent');
 var page = require('page');
 
 page('/', function () {
-	var hello = require('./views/landing.jsx');
+	var hello = require('./pages/landing.jsx');
 	React.render(hello(), document.getElementById('content'));
 });
 
 page('/otravista/', function () {
-	var otra = require('./views/otra.jsx');
+	var otra = require('./pages/otra.jsx');
 	React.render(otra({ saludo: 'Hola manola' }), document.getElementById('content'));
 });
 
 page('/otravista/:algo', function (ctx) {
-	var otra = require('./views/otra.jsx');
+	var otra = require('./pages/otra.jsx');
 	React.render(otra({ saludo: ctx.params.algo || 'Hola manola' }), document.getElementById('content'));
 });
 
 page.start();
 
-var server = require('./lib/auth.js');
+var server = require('./libs/auth.js');
 
 server.get('/auth', function (err, data) {
 	if (err) {
@@ -33,70 +33,72 @@ server.get('/auth', function (err, data) {
 
 server.auth('Andres', 'Atencio');
 
-},{"./lib/auth.js":3,"./views/landing.jsx":4,"./views/otra.jsx":5,"page":7,"react":164,"superagent":166}],2:[function(require,module,exports){
-"use strict";
+},{"./libs/auth.js":3,"./pages/landing.jsx":4,"./pages/otra.jsx":5,"page":7,"react":164,"superagent":166}],2:[function(require,module,exports){
+'use strict';
 
-var React = require("react");
+var React = require('react');
+var Server = require('../libs/auth.js');
 
 var formLogin = React.createClass({
-	displayName: "formLogin",
+	displayName: 'formLogin',
 
 	getInitialState: function getInitialState() {
 		return {
-			counter: 0
+			email: 'Andres',
+			pass: ''
 		};
 	},
 
-	increment: function increment() {
-		this.setState({ counter: this.state.counter + 1 });
+	handleChange: function handleChange(event) {
+
+		this.setState({ email: event.target.value });
+		console.log('inuput -----> ');
+		console.log(event);
 	},
+
+	login: function login() {},
 
 	render: function render() {
 		return React.createElement(
-			"div",
-			{ className: "six columns" },
+			'div',
+			{ className: 'eight columns' },
 			React.createElement(
-				"form",
+				'form',
 				null,
 				React.createElement(
-					"div",
-					{ className: "row" },
+					'div',
+					{ className: 'row' },
 					React.createElement(
-						"label",
-						{ "for": "email" },
-						"Your email"
+						'label',
+						{ 'for': 'email' },
+						'Your email'
 					),
-					React.createElement("input", { "class": "u-full-width", type: "email", placeholder: "test@mailbox.com", id: "email" })
+					React.createElement('input', { 'class': 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', name: 'email', value: this.state.email, onChange: this.handleChange })
 				),
 				React.createElement(
-					"div",
-					{ className: "row" },
+					'div',
+					{ className: 'row' },
 					React.createElement(
-						"label",
-						{ "for": "email" },
-						"Password"
+						'label',
+						{ 'for': 'email' },
+						'Password'
 					),
-					React.createElement("input", { "class": "u-full-width", type: "password", id: "pass" })
+					React.createElement('input', { 'class': 'u-full-width', type: 'password', id: 'pass' })
 				),
 				React.createElement(
-					"div",
-					{ className: "row" },
-					React.createElement("input", { "class": "button-primary", type: "submit", value: "Submit" })
+					'div',
+					{ className: 'row' },
+					React.createElement('input', { 'class': 'button-primary', type: 'submit', value: 'Submit' })
 				)
 			),
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"h2",
+					'h2',
 					null,
-					this.state.counter
+					this.state.email
 				)
-			),
-			React.createElement(
-				"button",
-				{ onClick: this.increment },
-				"Increment!"
 			)
 		);
 	}
@@ -104,7 +106,7 @@ var formLogin = React.createClass({
 
 module.exports = formLogin;
 
-},{"react":164}],3:[function(require,module,exports){
+},{"../libs/auth.js":3,"react":164}],3:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -161,7 +163,7 @@ var MyView = React.createClass({
       { className: 'row' },
       React.createElement(
         'div',
-        { className: 'six columns' },
+        { className: 'four columns' },
         React.createElement(
           'h4',
           null,
