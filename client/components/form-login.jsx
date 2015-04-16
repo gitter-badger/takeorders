@@ -24,7 +24,7 @@ var formLogin = React.createClass({
 	},
 
 	login: function (event) {
-		// var self = this;
+		
 		event.preventDefault();
 		Server.auth(this.state.email, this.state.pass, (err, data) => {
 			this.setState({verify: '/verify/' + data})
@@ -32,7 +32,7 @@ var formLogin = React.createClass({
 
 	},
 
-	render: function(){
+	render: function () {
 		return (
 			<form className="login-form">
 				<div>

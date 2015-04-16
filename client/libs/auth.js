@@ -13,7 +13,7 @@ class Server {
 		request
 			.get(url)
 		  	.authBearer('Sarasa')
-		  	.end(function(err,res) {
+		  	.end((err,res) => {
 		    	if (err) {
 		    		cb(err);
 		    	}
@@ -25,7 +25,7 @@ class Server {
 		request
 			.post('/auth/register')
 			.send({email, password})
-			.end(function (err, res) {
+			.end((err, res) => {
 				if (err) {
 					return cb(err)
 				}

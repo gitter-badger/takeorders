@@ -12,9 +12,9 @@ page('/otravista/', function () {
 	React.render(otra({saludo: 'Hola manola'}), document.getElementById('content'));
 })
 
-page('/otravista/:algo', function (ctx) {
-	var otra = require('./pages/otra.jsx');
-	React.render(otra({saludo: ctx.params.algo || 'Hola manola'}), document.getElementById('content'));
+page('/verify/:code', function (ctx) {
+	var verify = require('./pages/verify.jsx');
+	React.render(verify({code: ctx.params.code || 'Sin codigo'}), document.getElementById('content'));
 })
 
 
