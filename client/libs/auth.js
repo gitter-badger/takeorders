@@ -21,10 +21,10 @@ class Server {
 		 	})
 	}
 
-	static auth(email, pass) {
+	static auth(email, password) {
 		request
-			.post('/login')
-			.send({email, pass})
+			.post('/auth/register')
+			.send({email, password})
 			.end(function (err, res) {
 				console.log(res.body)
 			})

@@ -117,8 +117,8 @@ var Server = (function () {
 		}
 	}, {
 		key: 'auth',
-		value: function auth(email, pass) {
-			request.post('/login').send({ email: email, pass: pass }).end(function (err, res) {
+		value: function auth(email, password) {
+			request.post('/auth/register').send({ email: email, password: password }).end(function (err, res) {
 				console.log(res.body);
 			});
 		}

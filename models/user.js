@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var Email = require('mongoose-type-email');
 
 var UserSchema = new mongoose.Schema({
@@ -8,4 +10,7 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(require('mongoose-bcrypt'));
-var User = module.exports = mongoose.model('User', UserSchema);
+
+module.exports = mongoose.model('User', UserSchema);
+
+

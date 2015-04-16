@@ -7,8 +7,8 @@ function generateCode(){
 
 
 var VerifySchema = new mongoose.Schema({
-    user: {type: Relation, required:true, ref: 'User'},
+    user: [{type: Relation , required:true, ref: 'User'}],
     code: {type: String, default: generateCode}
 });
 
-var Verify = module.exports = mongoose.model('Verify', VerifySchema);
+module.exports = mongoose.model('Verify', VerifySchema);

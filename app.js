@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+require('./config/db.js');
+
+var auth = require('./libs/auth.js');
 
 var app = express();
 
@@ -22,10 +25,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+
+app.use('/auth', auth);
+// app.use('/', routes);
 app.get('*', function (req, res) {
     return res.sendFile(__dirname + '/public/index.html')
 })
+
 
 
 // catch 404 and forward to error handler
@@ -60,7 +66,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-require('./config/db')
+
 
 module.exports = app;
 
