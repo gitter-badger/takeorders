@@ -15,7 +15,3 @@ var MyView = React.createClass({
 });
 
 module.exports = React.createFactory(MyView);
-
-<div className>
-
-</div>

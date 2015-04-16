@@ -5,29 +5,19 @@ var React = require('react');
 var request = require('superagent');
 var page = require('page');
 
-<<<<<<< HEAD
-var hello = require('./views/landing.jsx');
-=======
 page('/', function () {
 	var hello = require('./pages/landing.jsx');
 	React.render(hello(), document.getElementById('content'));
 });
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
 
 page('/otravista/', function () {
 	var otra = require('./pages/otra.jsx');
 	React.render(otra({ saludo: 'Hola manola' }), document.getElementById('content'));
 });
 
-<<<<<<< HEAD
-request.post('/login').send(data).end(function (err, res) {
-	console.log(res);
-	console.log(err);
-=======
 page('/otravista/:algo', function (ctx) {
 	var otra = require('./pages/otra.jsx');
 	React.render(otra({ saludo: ctx.params.algo || 'Hola manola' }), document.getElementById('content'));
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
 });
 
 page.start();
@@ -65,79 +55,32 @@ var formLogin = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-<<<<<<< HEAD
-			"form",
-			{ className: "login-form" },
+			'form',
+			{ className: 'login-form' },
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"label",
-					{ htmlFor: "email" },
-					"Your email"
-=======
-			'div',
-			{ className: 'eight columns' },
-			React.createElement(
-				'form',
-				null,
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'label',
-						{ 'for': 'email' },
-						'Your email'
-					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', value: this.state.email, onChange: this.handleInputEmail })
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
+					'label',
+					{ htmlFor: 'email' },
+					'Your email'
 				),
-				React.createElement("input", { className: "u-full-width", type: "email", placeholder: "test@mailbox.com", id: "email" })
-			),
-			React.createElement(
-				"div",
-				null,
-				React.createElement(
-<<<<<<< HEAD
-					"label",
-					{ htmlFor: "pass" },
-					"Password"
-				),
-				React.createElement("input", { className: "u-full-width", type: "password", id: "pass" })
-			),
-			React.createElement(
-				"div",
-				null,
-				React.createElement("input", { className: "button-primary", type: "submit", value: "Submit" })
-=======
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'label',
-						{ 'for': 'email' },
-						'Password'
-					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'password', value: this.state.pass, onChange: this.handleInputPass })
-				),
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'button',
-						{ onClick: this.login },
-						'Ingresar'
-					)
-				)
+				React.createElement('input', { className: 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', id: 'email', onChange: this.handleInputEmail })
 			),
 			React.createElement(
 				'div',
 				null,
 				React.createElement(
-					'h2',
-					null,
-					this.state.email
-				)
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
+					'label',
+					{ htmlFor: 'pass' },
+					'Password'
+				),
+				React.createElement('input', { className: 'u-full-width', type: 'password', id: 'pass', onChange: this.handleInputPass })
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
 			)
 		);
 	}
@@ -201,19 +144,9 @@ var MyView = React.createClass({
       'div',
       { className: 'four columns login-form' },
       React.createElement(
-<<<<<<< HEAD
         'h4',
         null,
         'Login'
-=======
-        'div',
-        { className: 'four columns' },
-        React.createElement(
-          'h4',
-          null,
-          'Login'
-        )
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
       ),
       React.createElement(FormLogin, null),
       React.createElement(
@@ -227,11 +160,6 @@ var MyView = React.createClass({
 
 module.exports = React.createFactory(MyView);
 
-<<<<<<< HEAD
-React.createElement('div', { className: true });
-
-},{"../components/form-login.jsx":2,"react":159}],4:[function(require,module,exports){
-=======
 },{"../components/form-login.jsx":2,"react":164}],5:[function(require,module,exports){
 "use strict";
 
@@ -265,7 +193,6 @@ var MyView = React.createClass({
 module.exports = React.createFactory(MyView);
 
 },{"react":164}],6:[function(require,module,exports){
->>>>>>> 4b5f7daa89c5009f89329ea2080f09bddc2eecbd
 // shim for using process in browser
 
 var process = module.exports = {};
