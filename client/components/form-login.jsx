@@ -24,10 +24,10 @@ var formLogin = React.createClass({
 	},
 
 	login: function (event) {
-		var self = this;
+		// var self = this;
 		event.preventDefault();
-		Server.auth(this.state.email, this.state.pass, function (err, data) {
-			self.setState({verify: '/verify/' + data})
+		Server.auth(this.state.email, this.state.pass, (err, data) => {
+			this.setState({verify: '/verify/' + data})
 		});
 
 	},

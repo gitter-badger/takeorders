@@ -50,10 +50,12 @@ var formLogin = React.createClass({
 	},
 
 	login: function login(event) {
-		var self = this;
+		var _this = this;
+
+		// var self = this;
 		event.preventDefault();
 		Server.auth(this.state.email, this.state.pass, function (err, data) {
-			self.setState({ verify: '/verify/' + data });
+			_this.setState({ verify: '/verify/' + data });
 		});
 	},
 
