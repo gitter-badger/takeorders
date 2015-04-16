@@ -34,7 +34,8 @@ var formLogin = React.createClass({
 	getInitialState: function getInitialState() {
 		return {
 			email: '',
-			pass: ''
+			pass: '',
+			verify: ''
 		};
 	},
 
@@ -49,8 +50,11 @@ var formLogin = React.createClass({
 	},
 
 	login: function login(event) {
+		var self = this;
 		event.preventDefault();
-		Server.auth(this.state.email, this.state.pass);
+		Server.auth(this.state.email, this.state.pass, function (err, data) {
+			self.setState({ verify: '/verify/' + data });
+		});
 	},
 
 	render: function render() {
@@ -81,6 +85,15 @@ var formLogin = React.createClass({
 				'div',
 				null,
 				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'a',
+					{ href: this.state.verify },
+					this.state.verify
+				)
 			)
 		);
 	}
@@ -117,9 +130,12 @@ var Server = (function () {
 		}
 	}, {
 		key: 'auth',
-		value: function auth(email, password) {
+		value: function auth(email, password, cb) {
 			request.post('/auth/register').send({ email: email, password: password }).end(function (err, res) {
-				console.log(res.body);
+				if (err) {
+					return cb(err);
+				}
+				return cb(null, res.body.verify);
 			});
 		}
 	}]);

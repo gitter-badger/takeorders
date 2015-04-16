@@ -21,12 +21,15 @@ class Server {
 		 	})
 	}
 
-	static auth(email, password) {
+	static auth(email, password, cb) {
 		request
 			.post('/auth/register')
 			.send({email, password})
 			.end(function (err, res) {
-				console.log(res.body)
+				if (err) {
+					return cb(err)
+				}
+				return cb(null, res.body.verify)
 			})
 	}
 }

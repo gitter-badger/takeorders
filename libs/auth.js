@@ -96,7 +96,7 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
 
     console.log('User ' + user.email + ' signed up. Verify with /verify/' + verify.code);
 
-    return res.send({'message':'OK'});
+    return res.send({'verify':verify.code});
   });
 } catch(e) {
   console.log(e)

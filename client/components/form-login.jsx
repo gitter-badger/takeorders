@@ -6,7 +6,8 @@ var formLogin = React.createClass({
 	getInitialState: function () {
 	    return {
 	        email: '',
-	        pass: ''  
+	        pass: '',
+	        verify: ''  
 	    };
 	},
 
@@ -23,8 +24,11 @@ var formLogin = React.createClass({
 	},
 
 	login: function (event) {
+		var self = this;
 		event.preventDefault();
-		Server.auth(this.state.email, this.state.pass);
+		Server.auth(this.state.email, this.state.pass, function (err, data) {
+			self.setState({verify: '/verify/' + data})
+		});
 
 	},
 
@@ -43,6 +47,9 @@ var formLogin = React.createClass({
 
 				<div>
 					<input className="button-primary" type="submit" value="Submit" onClick={this.login}/>
+				</div>
+				<div>
+					<a href={this.state.verify} >{this.state.verify}</a>
 				</div>
 			</form>
 		);
