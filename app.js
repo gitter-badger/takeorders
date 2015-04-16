@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+
 var app = express();
 
 // view engine setup
@@ -23,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.get('*', function (req, res) {
-    return res.sendfile(__dirname + '/public/index.html')
+    return res.sendFile(__dirname + '/public/index.html')
 })
 
 
@@ -58,5 +59,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+require('./config/db')
 
 module.exports = app;
