@@ -65,7 +65,7 @@ var formLogin = React.createClass({
 					{ htmlFor: 'email' },
 					'Your email'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', id: 'email' })
+				React.createElement('input', { className: 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', id: 'email', onChange: this.handleInputEmail })
 			),
 			React.createElement(
 				'div',
@@ -75,12 +75,12 @@ var formLogin = React.createClass({
 					{ htmlFor: 'pass' },
 					'Password'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'password', id: 'pass' })
+				React.createElement('input', { className: 'u-full-width', type: 'password', id: 'pass', onChange: this.handleInputPass })
 			),
 			React.createElement(
 				'div',
 				null,
-				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit' })
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
 			)
 		);
 	}
@@ -159,8 +159,6 @@ var MyView = React.createClass({
 });
 
 module.exports = React.createFactory(MyView);
-
-React.createElement('div', { className: true });
 
 },{"../components/form-login.jsx":2,"react":164}],5:[function(require,module,exports){
 "use strict";

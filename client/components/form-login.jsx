@@ -33,16 +33,16 @@ var formLogin = React.createClass({
 			<form className="login-form">
 				<div>
 					<label htmlFor="email">Your email</label>
-					<input className="u-full-width" type="email" placeholder="test@mailbox.com" id="email" />
+					<input className="u-full-width" type="email" placeholder="test@mailbox.com" id="email" onChange={this.handleInputEmail}/>
 				</div>
 
 				<div>
 					<label htmlFor="pass">Password</label>
-					<input className="u-full-width" type="password" id="pass" />
+					<input className="u-full-width" type="password" id="pass" onChange={this.handleInputPass}/>
 				</div>
 
 				<div>
-					<input className="button-primary" type="submit" value="Submit" />
+					<input className="button-primary" type="submit" value="Submit" onClick={this.login}/>
 				</div>
 			</form>
 		);
