@@ -63,3 +63,9 @@ app.use(function(err, req, res, next) {
 require('./config/db')
 
 module.exports = app;
+
+return {
+    log: function(what) {
+        console.log(what);
+    }
+}

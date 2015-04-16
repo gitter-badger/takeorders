@@ -55,49 +55,32 @@ var formLogin = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-			'div',
-			{ className: 'eight columns' },
+			'form',
+			{ className: 'login-form' },
 			React.createElement(
-				'form',
+				'div',
 				null,
 				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'label',
-						{ 'for': 'email' },
-						'Your email'
-					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', value: this.state.email, onChange: this.handleInputEmail })
+					'label',
+					{ htmlFor: 'email' },
+					'Your email'
 				),
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'label',
-						{ 'for': 'email' },
-						'Password'
-					),
-					React.createElement('input', { 'class': 'u-full-width', type: 'password', value: this.state.pass, onChange: this.handleInputPass })
-				),
-				React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'button',
-						{ onClick: this.login },
-						'Ingresar'
-					)
-				)
+				React.createElement('input', { className: 'u-full-width', type: 'email', placeholder: 'test@mailbox.com', id: 'email', onChange: this.handleInputEmail })
 			),
 			React.createElement(
 				'div',
 				null,
 				React.createElement(
-					'h2',
-					null,
-					this.state.email
-				)
+					'label',
+					{ htmlFor: 'pass' },
+					'Password'
+				),
+				React.createElement('input', { className: 'u-full-width', type: 'password', id: 'pass', onChange: this.handleInputPass })
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
 			)
 		);
 	}
@@ -159,15 +142,11 @@ var MyView = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'row' },
+      { className: 'four columns login-form' },
       React.createElement(
-        'div',
-        { className: 'four columns' },
-        React.createElement(
-          'h4',
-          null,
-          'Login'
-        )
+        'h4',
+        null,
+        'Login'
       ),
       React.createElement(FormLogin, null),
       React.createElement(

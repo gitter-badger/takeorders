@@ -9,4 +9,3 @@ describe('Prueba mocha', function(){
 		expect('ejs').to.be(app.set('view engine'))
 	})
 })
-

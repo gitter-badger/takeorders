@@ -30,27 +30,22 @@ var formLogin = React.createClass({
 
 	render: function(){
 		return (
-			<div className="eight columns">
-				<form>
-					<div className="row">
-						<label for="email">Your email</label>
-						<input class="u-full-width" type="email" placeholder="test@mailbox.com" value={this.state.email} onChange={this.handleInputEmail} />
-					</div>
-					<div className="row">
-						<label for="email">Password</label>
-						<input class="u-full-width" type="password" value={this.state.pass} onChange={this.handleInputPass} />
-					</div>
-					<div className="row">
-						<button onClick={this.login}>Ingresar</button>
-					</div>
-
-				</form>
+			<form className="login-form">
 				<div>
-					
-					<h2>{this.state.email}</h2>
+					<label htmlFor="email">Your email</label>
+					<input className="u-full-width" type="email" placeholder="test@mailbox.com" id="email" onChange={this.handleInputEmail}/>
 				</div>
-			</div>
-			);
+
+				<div>
+					<label htmlFor="pass">Password</label>
+					<input className="u-full-width" type="password" id="pass" onChange={this.handleInputPass}/>
+				</div>
+
+				<div>
+					<input className="button-primary" type="submit" value="Submit" onClick={this.login}/>
+				</div>
+			</form>
+		);
 	}
 });
 
