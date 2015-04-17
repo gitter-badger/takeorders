@@ -105,8 +105,8 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
 });
 
 // verify a user
-auth.post('/verify', [urlParse, jsonParse], function(req,res){
-  Verify.findOne({code:req.body.token})
+auth.get('/verify/:code', [urlParse, jsonParse], function(req,res){
+  Verify.findOne({code:req.params.code})
     .exec()
     .then(function(verify){
       if (!verify){

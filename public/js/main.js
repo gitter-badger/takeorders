@@ -34,7 +34,7 @@ var formLogin = React.createClass({
 		return {
 			email: '',
 			pass: '',
-			verify: ''
+			logueo: ''
 		};
 	},
 
@@ -52,8 +52,12 @@ var formLogin = React.createClass({
 		var _this = this;
 
 		event.preventDefault();
-		Server.register(this.state.email, this.state.pass, function (err, data) {
-			_this.setState({ verify: '/verify/' + data });
+		Server.login(this.state.email, this.state.pass, function (err, data) {
+			if (err) {
+				_this.setState({ logueo: 'ERROR' });
+			} else {
+				_this.setState({ logueo: 'OK' });
+			}
 		});
 	},
 
@@ -84,15 +88,15 @@ var formLogin = React.createClass({
 			React.createElement(
 				'div',
 				null,
-				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Login', onClick: this.login })
 			),
 			React.createElement(
 				'div',
 				null,
 				React.createElement(
-					'a',
-					{ href: this.state.verify },
-					this.state.verify
+					'h1',
+					null,
+					this.state.logueo
 				)
 			)
 		);
@@ -227,8 +231,10 @@ var Server = (function () {
 		value: function login(email, password, cb) {
 			request.post('/auth/login').send({ email: email, password: password }).end(function (err, res) {
 				if (err) {
+					console.log(err);
 					return cb(err);
 				}
+				localStorage.token = res.body.token;
 				return cb(null, res.body);
 			});
 		}
@@ -317,31 +323,35 @@ var MyView = React.createClass({
 module.exports = React.createFactory(MyView);
 
 },{"react":166}],7:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var React = require("react");
+var React = require('react');
+var request = require('superagent');
 
 var MyView = React.createClass({
-  displayName: "MyView",
+  displayName: 'MyView',
 
   getInitialState: function getInitialState() {
-
+    request.get('/auth/verify/' + this.props.code).end(function (err, res) {
+      console.log(err);
+      console.log(res);
+    });
     return {};
   },
   render: function render() {
     return React.createElement(
-      "div",
-      { className: "row" },
+      'div',
+      { className: 'row' },
       React.createElement(
-        "div",
-        { className: "six columns" },
+        'div',
+        { className: 'six columns' },
         React.createElement(
-          "h4",
+          'h4',
           null,
-          "Cuenta verificada"
+          'Cuenta verificada'
         ),
         React.createElement(
-          "p",
+          'p',
           null,
           this.props.code
         )
@@ -352,7 +362,7 @@ var MyView = React.createClass({
 
 module.exports = React.createFactory(MyView);
 
-},{"react":166}],8:[function(require,module,exports){
+},{"react":166,"superagent":168}],8:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

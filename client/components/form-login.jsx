@@ -7,7 +7,7 @@ var formLogin = React.createClass({
 	    return {
 	        email: '',
 	        pass: '',
-	        verify: ''  
+	        logueo: ''  
 	    };
 	},
 
@@ -26,8 +26,12 @@ var formLogin = React.createClass({
 	login: function (event) {
 		
 		event.preventDefault();
-		Server.register(this.state.email, this.state.pass, (err, data) => {
-			this.setState({verify: '/verify/' + data})
+		Server.login(this.state.email, this.state.pass, (err, data) => {
+			if (err) {
+				this.setState({logueo: 'ERROR'})
+			} else {
+				this.setState({logueo: 'OK'})
+			}
 		});
 
 	},
@@ -46,10 +50,10 @@ var formLogin = React.createClass({
 				</div>
 
 				<div>
-					<input className="button-primary" type="submit" value="Submit" onClick={this.login}/>
+					<input className="button-primary" type="submit" value="Login" onClick={this.login}/>
 				</div>
 				<div>
-					<a href={this.state.verify} >{this.state.verify}</a>
+					<h1>{this.state.logueo}</h1>
 				</div>
 			</form>
 		);

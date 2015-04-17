@@ -44,8 +44,10 @@ class Server {
 			.send({email, password})
 			.end((err, res) => {
 				if (err) {
+					console.log(err)
 					return cb(err)
 				}
+				localStorage.token = res.body.token;
 				return cb(null, res.body)
 			})
 	}
