@@ -10,28 +10,46 @@ class Server {
 	}
 
 	static get(url, cb) {
-		request
-			.get(url)
-		  	.authBearer('Sarasa')
-		  	.end((err,res) => {
-		    	if (err) {
-		    		cb(err);
-		    	}
-		    	cb(null, res)
-		 	})
+		if (localStorage.token) {
+			request
+				.get(url)
+			  	.authBearer(localStorage.token)
+			  	.end((err,res) => {
+			    	if (err) {
+			    		cb(err);
+			    	}
+			    	cb(null, res)
+			 	})
+		} else {
+			alert('Para realizar esta accion, debes loguearte');
+		}
+		
 	}
 
-	static auth(email, password, cb) {
+	static register(email, password, cb) {
 		request
 			.post('/auth/register')
 			.send({email, password})
 			.end((err, res) => {
 				if (err) {
 					return cb(err)
-				}
+				} 
 				return cb(null, res.body.verify)
 			})
 	}
+
+	static login(email, password, cb) {
+		request
+			.post('/auth/login')
+			.send({email, password})
+			.end((err, res) => {
+				if (err) {
+					return cb(err)
+				}
+				return cb(null, res.body)
+			})
+	}
+
 }
 
 module.exports = Server;

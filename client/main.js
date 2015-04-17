@@ -1,5 +1,4 @@
 var React = require('react');
-var request = require('superagent');
 var page = require('page');
 
 page('/', function () {
@@ -16,8 +15,6 @@ page('/verify/:code', function (ctx) {
 	var verify = require('./pages/verify.jsx');
 	React.render(verify({code: ctx.params.code || 'Sin codigo'}), document.getElementById('content'));
 })
-
-
 
 page.start()
 
