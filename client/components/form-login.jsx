@@ -1,5 +1,6 @@
 var React = require('react');
-var Server = require('../libs/auth.js')
+var Server = require('../libs/auth.js');
+var page = require('page');
 
 var formLogin = React.createClass({
 
@@ -28,9 +29,10 @@ var formLogin = React.createClass({
 		event.preventDefault();
 		Server.login(this.state.email, this.state.pass, (err, data) => {
 			if (err) {
-				this.setState({logueo: 'ERROR'})
+				this.setState({logueo: 'ERROR'});
 			} else {
-				this.setState({logueo: 'OK'})
+				this.setState({logueo: 'OK'});
+				page('/admin');
 			}
 		});
 
