@@ -223,6 +223,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var request = require('superagent');
 var superAgentAuth = require('superagent-auth-bearer');
+var page = require('page');
 
 superAgentAuth(request);
 
@@ -243,6 +244,7 @@ var Server = (function () {
 				});
 			} else {
 				alert('Para realizar esta accion, debes loguearte');
+				page('/');
 			}
 		}
 	}, {
@@ -274,7 +276,7 @@ var Server = (function () {
 
 module.exports = Server;
 
-},{"superagent":169,"superagent-auth-bearer":168}],5:[function(require,module,exports){
+},{"page":10,"superagent":169,"superagent-auth-bearer":168}],5:[function(require,module,exports){
 'use strict';
 
 var React = require('react');

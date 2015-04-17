@@ -1,5 +1,6 @@
 const request = require('superagent');
 const superAgentAuth = require('superagent-auth-bearer');
+const page = require('page');
 
 superAgentAuth(request)
 
@@ -22,6 +23,7 @@ class Server {
 			 	})
 		} else {
 			alert('Para realizar esta accion, debes loguearte');
+			page('/');
 		}
 		
 	}
