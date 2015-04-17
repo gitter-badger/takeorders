@@ -197,7 +197,7 @@ var formLogin = React.createClass({
 			React.createElement(
 				'div',
 				null,
-				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Submit', onClick: this.login })
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Register', onClick: this.login })
 			),
 			React.createElement(
 				'div',
@@ -269,6 +269,12 @@ var Server = (function () {
 				return cb(null, res.body);
 			});
 		}
+	}, {
+		key: 'logout',
+		value: function logout() {
+			delete localStorage.token;
+			page('/');
+		}
 	}]);
 
 	return Server;
@@ -281,6 +287,7 @@ module.exports = Server;
 
 var React = require('react');
 var request = require('superagent');
+var Server = require('../libs/auth.js');
 
 var MyView = React.createClass({
   displayName: 'MyView',
@@ -288,6 +295,9 @@ var MyView = React.createClass({
   getInitialState: function getInitialState() {
 
     return {};
+  },
+  logout: function logout() {
+    Server.logout();
   },
   render: function render() {
     return React.createElement(
@@ -305,6 +315,11 @@ var MyView = React.createClass({
           'p',
           null,
           this.props.email
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.logout },
+          'Logout'
         )
       )
     );
@@ -313,7 +328,7 @@ var MyView = React.createClass({
 
 module.exports = React.createFactory(MyView);
 
-},{"react":167,"superagent":169}],6:[function(require,module,exports){
+},{"../libs/auth.js":4,"react":167,"superagent":169}],6:[function(require,module,exports){
 'use strict';
 
 var React = require('react');

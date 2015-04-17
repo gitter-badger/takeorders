@@ -54,6 +54,11 @@ class Server {
 			})
 	}
 
+	static logout() {
+		delete localStorage.token;
+		page('/');
+	}
+
 }
 
 module.exports = Server;

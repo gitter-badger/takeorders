@@ -46,7 +46,7 @@ var formLogin = React.createClass({
 				</div>
 
 				<div>
-					<input className="button-primary" type="submit" value="Submit" onClick={this.login}/>
+					<input className="button-primary" type="submit" value="Register" onClick={this.login}/>
 				</div>
 				<div>
 					<a href={this.state.verify} >{this.state.verify}</a>
