@@ -1,6 +1,8 @@
 var React = require('react');
-var Server = require('../libs/auth.js');
 var page = require('page');
+
+var Server = require('../libs/auth.js');
+var validator = require('../libs/validations.js');
 
 var formLogin = React.createClass({
 
@@ -27,15 +29,19 @@ var formLogin = React.createClass({
 	login: function (event) {
 		
 		event.preventDefault();
-		Server.login(this.state.email, this.state.pass, (err, data) => {
-			if (err) {
-				this.setState({logueo: 'ERROR'});
-			} else {
-				this.setState({logueo: 'OK'});
-				page('/admin');
-			}
-		});
 
+		if (validator.email(this.state.email)) {
+			Server.login(this.state.email, this.state.pass, (err, data) => {
+				if (err) {
+					this.setState({logueo: 'ERROR'});
+				} else {
+					this.setState({logueo: 'OK'});
+					page('/admin');
+				}
+			});	
+		} else {
+			alert('El email no es valido')
+		}
 	},
 
 	render: function () {
