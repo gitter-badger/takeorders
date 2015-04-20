@@ -270,6 +270,15 @@ var navbarSide = React.createClass({
 					null,
 					React.createElement(
 						'a',
+						{ href: '/admin', className: 'navbar-link' },
+						'Dashboard'
+					)
+				),
+				React.createElement(
+					'li',
+					null,
+					React.createElement(
+						'a',
 						{ href: '/admin/pedidos', className: 'navbar-link' },
 						'Pedidos'
 					)

@@ -15,6 +15,9 @@ var navbarSide = React.createClass({
 		return (
 			<nav>
 		      <ul className="navbar-list">
+		      	<li>
+		          <a href="/admin" className="navbar-link">Dashboard</a>
+		        </li>
 		        <li>
 		          <a href="/admin/pedidos" className="navbar-link">Pedidos</a>
 		        </li>
