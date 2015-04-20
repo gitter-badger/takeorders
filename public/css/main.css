@@ -53,3 +53,15 @@ body {
   -webkit-transform: translateX(100px);
   opacity: 0;
 }
+
+.contenedor {
+  display: -webkit-flex;
+  display: flex;
+}
+nav {
+  width: 200px;
+}
+.flex-column {
+  -webkit-flex: 1;
+          flex: 1;
+}

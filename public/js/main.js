@@ -331,10 +331,28 @@ var MyView = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'row' },
+      { className: 'contenedor' },
+      React.createElement(
+        'nav',
+        null,
+        React.createElement(
+          'ul',
+          null,
+          React.createElement(
+            'li',
+            null,
+            'Home'
+          ),
+          React.createElement(
+            'li',
+            null,
+            'Profile'
+          )
+        )
+      ),
       React.createElement(
         'div',
-        { className: 'six columns' },
+        { className: 'flex-column' },
         React.createElement(
           'h4',
           null,
@@ -349,6 +367,16 @@ var MyView = React.createClass({
           'button',
           { onClick: this.logout },
           'Logout'
+        ),
+        React.createElement(
+          'h2',
+          null,
+          'Lorem'
+        ),
+        React.createElement(
+          'p',
+          null,
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit autem dolorem expedita aut temporibus iusto blanditiis, suscipit inventore doloribus, placeat, at adipisci. Adipisci molestiae, hic, corrupti mollitia ipsum laboriosam obcaecati!'
         )
       )
     );
