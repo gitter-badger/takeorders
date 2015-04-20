@@ -41,7 +41,19 @@ page('/admin', function (ctx) {
 			React.render(admin({email: res.body.email}), content);
 		}
 	})
-})
+});
+
+page('/admin/pedidos', function (ctx) {
+	var pedidos = require('./pages/pedidos.jsx');
+	Server.get('/auth/user', (err, res) => {
+		if (err) {
+			console.log(err)
+			page('/');
+		} else {
+			React.render(pedidos(), content);
+		}
+	})
+});
 
 page.start()
 

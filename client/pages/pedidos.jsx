@@ -33,9 +33,7 @@ var MyView = React.createClass({
       </ul>
       </nav>
         <div className="flex-column">
-          <h4>Bienvenido:</h4>
-          <p>{this.props.email}</p>
-          <button onClick={this.logout}>Logout</button>
+          <h4>Pedidos</h4>
         </div>
       </div>
    
