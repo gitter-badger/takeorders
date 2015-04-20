@@ -629,11 +629,13 @@ module.exports = React.createFactory(MyView);
 },{"../components/navbar.jsx":5,"react":189}],11:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
+var ReactTransitionGroup = React.addons.CSSTransitionGroup;
 var request = require('superagent');
 var Server = require('../libs/auth.js');
 
 var Navbar = require('../components/navbar.jsx');
+var NavbarSide = require('../components/navbar-side.jsx');
 
 var MyView = React.createClass({
   displayName: 'MyView',
@@ -653,57 +655,18 @@ var MyView = React.createClass({
       React.createElement(
         'div',
         { className: 'contenedor' },
+        React.createElement(NavbarSide, null),
         React.createElement(
-          'nav',
-          null,
+          ReactTransitionGroup,
+          { transitionName: 'example', transitionAppear: true },
           React.createElement(
-            'ul',
-            { className: 'navbar-list' },
+            'div',
+            { className: 'flex-column' },
             React.createElement(
-              'li',
+              'h4',
               null,
-              React.createElement(
-                'a',
-                { href: '/admin/pedidos', className: 'navbar-link' },
-                'Pedidos'
-              )
-            ),
-            React.createElement(
-              'li',
-              null,
-              React.createElement(
-                'a',
-                { href: '/admin/productos', className: 'navbar-link' },
-                'Productos'
-              )
-            ),
-            React.createElement(
-              'li',
-              null,
-              React.createElement(
-                'a',
-                { href: '/admin/clientes', className: 'navbar-link' },
-                'Clientes'
-              )
-            ),
-            React.createElement(
-              'li',
-              null,
-              React.createElement(
-                'a',
-                { href: '/admin/cuentas', className: 'navbar-link' },
-                'Cuentas'
-              )
+              'Pedidos'
             )
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'flex-column' },
-          React.createElement(
-            'h4',
-            null,
-            'Pedidos'
           )
         )
       )
@@ -713,7 +676,7 @@ var MyView = React.createClass({
 
 module.exports = React.createFactory(MyView);
 
-},{"../components/navbar.jsx":5,"../libs/auth.js":6,"react":189,"superagent":191}],12:[function(require,module,exports){
+},{"../components/navbar-side.jsx":4,"../components/navbar.jsx":5,"../libs/auth.js":6,"react/addons":17,"superagent":191}],12:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
