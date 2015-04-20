@@ -2,6 +2,7 @@ var React = require('react');
 var request = require('superagent');
 var Server = require('../libs/auth.js');
 
+var Navbar = require('../components/navbar.jsx');
 
 var MyView = React.createClass({
 	getInitialState: function () {
@@ -15,6 +16,9 @@ var MyView = React.createClass({
   },
   render: function () {
     return (
+    	<div>
+    		<Navbar email={this.props.email}/>
+
       <div className="contenedor">
       <nav>
       <ul className="navbar-list">
@@ -38,7 +42,7 @@ var MyView = React.createClass({
           <button onClick={this.logout}>Logout</button>
         </div>
       </div>
-   
+	</div>
     );
   }
 });

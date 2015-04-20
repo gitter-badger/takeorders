@@ -1,11 +1,14 @@
 var React = require('react');
 
+var Navbar = require('../components/navbar.jsx');
 var FormLogin = require('../components/form-login.jsx');
 var FormRegister = require('../components/form-register.jsx');
 
 var MyView = React.createClass({
   render: () => {
     return (
+    	<div>
+		<Navbar />
       <div className="row">
         <div className="row">
 			<div className="six columns">
@@ -17,6 +20,7 @@ var MyView = React.createClass({
 				<FormRegister />
 			</div>
         </div>
+      </div>
       </div>
     );
   }

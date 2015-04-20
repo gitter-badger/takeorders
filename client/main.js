@@ -2,19 +2,23 @@ var React = require('react');
 var page = require('page');
 var Server = require('./libs/auth.js');
 
-var content = document.getElementById('content');
+// var content = document.getElementById('content');
 
-page('*', function(ctx,  next){
-  if (ctx.init) {
-    next();
-  } else {
-    content.classList.add('transition');
-    setTimeout(function(){
-      content.classList.remove('transition');
-      next();
-    }, 300);
-  }
-})
+// function transition (ctx, next) {
+// 	if (ctx.init) {
+// 		next();
+// 	} else {
+// 		content.classList.add('transition');
+// 	    setTimeout(function(){
+// 	      content.classList.remove('transition');
+// 	      next();
+// 	    }, 300);
+// 	}
+// }
+// page('*', function(ctx,  next){
+
+//   }
+// })
 
 page('/', function () {
 	var hello = require('./pages/landing.jsx');
@@ -50,7 +54,7 @@ page('/admin/pedidos', function (ctx) {
 			console.log(err)
 			page('/');
 		} else {
-			React.render(pedidos(), content);
+			React.render(pedidos({email: res.body.email}), content);
 		}
 	})
 });
