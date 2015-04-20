@@ -1,5 +1,6 @@
 var React = require('react');
 var request = require('superagent');
+var Navbar = require('../components/navbar.jsx');
 
 var MyView = React.createClass({
 	getInitialState: function () {
@@ -8,18 +9,20 @@ var MyView = React.createClass({
         console.log(res)
       })
 	    return {
-	          
+
 	    };
 	},
   render: function () {
     return (
+    	<div>
+    	<Navbar />
       <div className="row">
         <div className="six columns">
           <h4>Cuenta verificada</h4>
           <p>{this.props.code}</p>
         </div>
       </div>
-   
+   	 	</div>
     );
   }
 });
