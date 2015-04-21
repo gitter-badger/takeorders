@@ -179,14 +179,14 @@ var FormProducts = React.createClass({
 	render: function render() {
 		return React.createElement(
 			"form",
-			{ className: "login-form" },
+			null,
 			React.createElement(
 				"div",
 				null,
 				React.createElement(
 					"label",
 					{ htmlFor: "email" },
-					"Name"
+					"Nombre"
 				),
 				React.createElement("input", { className: "u-full-width", type: "text", placeholder: "Tomaco" })
 			),
@@ -206,14 +206,24 @@ var FormProducts = React.createClass({
 				React.createElement(
 					"label",
 					{ htmlFor: "pass" },
-					"Description"
+					"Cantidad"
 				),
 				React.createElement("input", { className: "u-full-width", type: "text" })
 			),
 			React.createElement(
 				"div",
 				null,
-				React.createElement("input", { className: "button-primary", type: "submit", value: "Add" })
+				React.createElement(
+					"label",
+					{ htmlFor: "pass" },
+					"Imagen"
+				),
+				React.createElement("input", { className: "u-full-width", type: "file" })
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement("input", { className: "button-primary", type: "submit", value: "Agregar" })
 			),
 			React.createElement("div", null)
 		);
