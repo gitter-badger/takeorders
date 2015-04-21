@@ -9,24 +9,24 @@ var formLogin = React.createClass({
 	    return {
 	        email: '',
 	        pass: '',
-	        verify: ''  
+	        verify: ''
 	    };
 	},
 
 	handleInputEmail: function (event) {
-		
+
 		this.setState({email: event.target.value})
 
 	},
 
 	handleInputPass: function (event) {
-		
+
 		this.setState({pass: event.target.value})
 
 	},
 
 	login: function (event) {
-		
+
 		event.preventDefault();
 		if (validator.email(this.state.email)) {
 			Server.register(this.state.email, this.state.pass, (err, data) => {
@@ -35,7 +35,7 @@ var formLogin = React.createClass({
 		} else {
 			alert('El email no es valido');
 		}
-		
+
 
 	},
 

@@ -10,24 +10,24 @@ var formLogin = React.createClass({
 	    return {
 	        email: '',
 	        pass: '',
-	        logueo: ''  
+	        logueo: ''
 	    };
 	},
 
 	handleInputEmail: function (event) {
-		
+
 		this.setState({email: event.target.value})
 
 	},
 
 	handleInputPass: function (event) {
-		
+
 		this.setState({pass: event.target.value})
 
 	},
 
 	login: function (event) {
-		
+
 		event.preventDefault();
 
 		if (validator.email(this.state.email)) {
@@ -35,10 +35,9 @@ var formLogin = React.createClass({
 				if (err) {
 					this.setState({logueo: 'ERROR'});
 				} else {
-					this.setState({logueo: 'OK'});
 					page('/admin');
 				}
-			});	
+			});
 		} else {
 			alert('El email no es valido')
 		}

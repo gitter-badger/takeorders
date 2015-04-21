@@ -1,8 +1,5 @@
 var React = require('react');
 
-var Server = require('../libs/auth.js');
-var validator = require('../libs/validations.js');
-
 var navbar = React.createClass({
 
 	getInitialState: function () {

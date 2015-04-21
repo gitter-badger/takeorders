@@ -1,5 +1,6 @@
 var React = require('react');
 var request = require('superagent');
+
 var Navbar = require('../components/navbar.jsx');
 
 var MyView = React.createClass({

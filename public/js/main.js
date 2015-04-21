@@ -104,7 +104,6 @@ var formLogin = React.createClass({
 				if (err) {
 					_this.setState({ logueo: 'ERROR' });
 				} else {
-					_this.setState({ logueo: 'OK' });
 					page('/admin');
 				}
 			});
@@ -244,15 +243,12 @@ var formLogin = React.createClass({
 module.exports = formLogin;
 
 },{"../libs/auth.js":6,"../libs/validations.js":7,"react":189}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
-var React = require('react');
-
-var Server = require('../libs/auth.js');
-var validator = require('../libs/validations.js');
+var React = require("react");
 
 var navbarSide = React.createClass({
-	displayName: 'navbarSide',
+	displayName: "navbarSide",
 
 	getInitialState: function getInitialState() {
 		return {};
@@ -260,54 +256,54 @@ var navbarSide = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-			'nav',
+			"nav",
 			null,
 			React.createElement(
-				'ul',
-				{ className: 'navbar-list' },
+				"ul",
+				{ className: "navbar-list" },
 				React.createElement(
-					'li',
+					"li",
 					null,
 					React.createElement(
-						'a',
-						{ href: '/admin', className: 'navbar-link' },
-						'Dashboard'
+						"a",
+						{ href: "/admin", className: "navbar-link" },
+						"Dashboard"
 					)
 				),
 				React.createElement(
-					'li',
+					"li",
 					null,
 					React.createElement(
-						'a',
-						{ href: '/admin/pedidos', className: 'navbar-link' },
-						'Pedidos'
+						"a",
+						{ href: "/admin/pedidos", className: "navbar-link" },
+						"Pedidos"
 					)
 				),
 				React.createElement(
-					'li',
+					"li",
 					null,
 					React.createElement(
-						'a',
-						{ href: '/admin/productos', className: 'navbar-link' },
-						'Productos'
+						"a",
+						{ href: "/admin/productos", className: "navbar-link" },
+						"Productos"
 					)
 				),
 				React.createElement(
-					'li',
+					"li",
 					null,
 					React.createElement(
-						'a',
-						{ href: '/admin/clientes', className: 'navbar-link' },
-						'Clientes'
+						"a",
+						{ href: "/admin/clientes", className: "navbar-link" },
+						"Clientes"
 					)
 				),
 				React.createElement(
-					'li',
+					"li",
 					null,
 					React.createElement(
-						'a',
-						{ href: '/admin/cuentas', className: 'navbar-link' },
-						'Cuentas'
+						"a",
+						{ href: "/admin/cuentas", className: "navbar-link" },
+						"Cuentas"
 					)
 				)
 			)
@@ -317,13 +313,10 @@ var navbarSide = React.createClass({
 
 module.exports = navbarSide;
 
-},{"../libs/auth.js":6,"../libs/validations.js":7,"react":189}],5:[function(require,module,exports){
+},{"react":189}],5:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
-
-var Server = require('../libs/auth.js');
-var validator = require('../libs/validations.js');
 
 var navbar = React.createClass({
 	displayName: 'navbar',
@@ -397,7 +390,7 @@ var navbar = React.createClass({
 
 module.exports = navbar;
 
-},{"../libs/auth.js":6,"../libs/validations.js":7,"react":189}],6:[function(require,module,exports){
+},{"react":189}],6:[function(require,module,exports){
 'use strict';
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
@@ -484,69 +477,64 @@ module.exports = {
 },{}],8:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-
 var React = require('react/addons');
 
 var ReactTransitionGroup = React.addons.CSSTransitionGroup;
 
-var request = require('superagent');
 var Server = require('../libs/auth.js');
-
 var Navbar = require('../components/navbar.jsx');
-
 var NavbarSide = require('../components/navbar-side.jsx');
 
 var MyView = React.createClass({
-  displayName: 'MyView',
+	displayName: 'MyView',
 
-  getInitialState: function getInitialState() {
+	getInitialState: function getInitialState() {
 
-    return {};
-  },
-  logout: function logout() {
-    Server.logout();
-  },
-  render: function render() {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(Navbar, { email: this.props.email }),
-      React.createElement(
-        'div',
-        { className: 'contenedor' },
-        React.createElement(NavbarSide, null),
-        React.createElement(
-          ReactTransitionGroup,
-          { transitionName: 'example', transitionAppear: true },
-          React.createElement(
-            'div',
-            { className: 'flex-column' },
-            React.createElement(
-              'h4',
-              null,
-              'Bienvenido:'
-            ),
-            React.createElement(
-              'p',
-              null,
-              this.props.email
-            ),
-            React.createElement(
-              'button',
-              { onClick: this.logout },
-              'Logout'
-            )
-          )
-        )
-      )
-    );
-  }
+		return {};
+	},
+	logout: function logout() {
+		Server.logout();
+	},
+	render: function render() {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement(Navbar, { email: this.props.email }),
+			React.createElement(
+				'div',
+				{ className: 'contenedor' },
+				React.createElement(NavbarSide, null),
+				React.createElement(
+					ReactTransitionGroup,
+					{ transitionName: 'example', transitionAppear: true },
+					React.createElement(
+						'div',
+						{ className: 'flex-column' },
+						React.createElement(
+							'h4',
+							null,
+							'Bienvenido:'
+						),
+						React.createElement(
+							'p',
+							null,
+							this.props.email
+						),
+						React.createElement(
+							'button',
+							{ onClick: this.logout },
+							'Logout'
+						)
+					)
+				)
+			)
+		);
+	}
 });
 
 module.exports = React.createFactory(MyView);
 
-},{"../components/navbar-side.jsx":4,"../components/navbar.jsx":5,"../libs/auth.js":6,"react":189,"react/addons":17,"superagent":191}],9:[function(require,module,exports){
+},{"../components/navbar-side.jsx":4,"../components/navbar.jsx":5,"../libs/auth.js":6,"react/addons":17}],9:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -690,6 +678,7 @@ module.exports = React.createFactory(MyView);
 
 var React = require('react');
 var request = require('superagent');
+
 var Navbar = require('../components/navbar.jsx');
 
 var MyView = React.createClass({
