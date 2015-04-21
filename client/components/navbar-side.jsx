@@ -16,16 +16,16 @@ var navbarSide = React.createClass({
 		          <a href="/admin" className="navbar-link">Dashboard</a>
 		        </li>
 		        <li>
-		          <a href="/admin/pedidos" className="navbar-link">Pedidos</a>
+		          <a href="/admin/products" className="navbar-link">Products</a>
 		        </li>
 		        <li>
-		          <a href="/admin/productos" className="navbar-link">Productos</a>
+		          <a href="/admin/orders" className="navbar-link">Orders</a>
 		        </li>
 		        <li>
-		          <a href="/admin/clientes" className="navbar-link">Clientes</a>
+		          <a href="/admin/customer" className="navbar-link">Customer</a>
 		        </li>
 		        <li>
-		          <a href="/admin/cuentas" className="navbar-link">Cuentas</a>
+		          <a href="/admin/accounts" className="navbar-link">Accounts</a>
 		        </li>
 		      </ul>
 		      </nav>

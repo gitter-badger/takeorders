@@ -59,6 +59,18 @@ page('/admin/pedidos', function (ctx) {
 	})
 });
 
+page('/admin/products', function (ctx) {
+	var products = require('./pages/products.jsx');
+	Server.get('/auth/user', (err, res) => {
+		if (err) {
+			console.log(err)
+			page('/');
+		} else {
+			React.render(products({email: res.body.email}), content);
+		}
+	})
+});
+
 page.start()
 
 
