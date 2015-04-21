@@ -19,13 +19,7 @@ var navbar = React.createClass({
 		          <li className="navbar-item">
 		            <a href="/" className="navbar-link">Home</a>
 		          </li>
-		          <li className="navbar-item">
-		            <a href="/" className="navbar-link">Home</a>
-		          </li>
-		          <li className="navbar-item">
-		            <a href="/" className="navbar-link">Home</a>
-		          </li>
-		          <li className="navbar-item">
+		          <li className="navbar-itemr">
 		            <a href={this.state.usuario} className="navbar-link">{this.props.email}</a>
 		          </li>
 		        </ul>

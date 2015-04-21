@@ -433,25 +433,7 @@ var navbar = React.createClass({
 					),
 					React.createElement(
 						'li',
-						{ className: 'navbar-item' },
-						React.createElement(
-							'a',
-							{ href: '/', className: 'navbar-link' },
-							'Home'
-						)
-					),
-					React.createElement(
-						'li',
-						{ className: 'navbar-item' },
-						React.createElement(
-							'a',
-							{ href: '/', className: 'navbar-link' },
-							'Home'
-						)
-					),
-					React.createElement(
-						'li',
-						{ className: 'navbar-item' },
+						{ className: 'navbar-itemr' },
 						React.createElement(
 							'a',
 							{ href: this.state.usuario, className: 'navbar-link' },

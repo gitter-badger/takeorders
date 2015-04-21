@@ -26,6 +26,12 @@ body {
 	position: relative;
 }
 
+.navbar-itemr {
+	float: right;
+	margin-bottom: 0;
+	position: relative;
+}
+
 .navbar-link {
 	color: #222;
 	font-size: 11px;
@@ -58,6 +64,7 @@ body {
   display: -webkit-flex;
   display: flex;
 }
+
 nav {
   width: 200px;
 }
