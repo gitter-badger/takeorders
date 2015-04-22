@@ -5,7 +5,7 @@ const page = require('page');
 superAgentAuth(request)
 
 class Server {
-	
+
 	constructor () {
 
 	}
@@ -25,7 +25,7 @@ class Server {
 			alert('Para realizar esta accion, debes loguearte');
 			page('/');
 		}
-		
+
 	}
 
 	static register(email, password, cb) {
@@ -33,9 +33,10 @@ class Server {
 			.post('/auth/register')
 			.send({email, password})
 			.end((err, res) => {
+				console.log(err)
 				if (err) {
 					return cb(err)
-				} 
+				}
 				return cb(null, res.body.verify)
 			})
 	}
@@ -46,7 +47,6 @@ class Server {
 			.send({email, password})
 			.end((err, res) => {
 				if (err) {
-					console.log(err)
 					return cb(err)
 				}
 				localStorage.token = res.body.token;

@@ -1,5 +1,5 @@
 /**
- * This includes auth-related API endpoints 
+ * This includes auth-related API endpoints
  */
 
 var express = require('express'),
@@ -45,8 +45,8 @@ auth.requireToken = function(req,res,next){
 
 // get JWT token for login credentials
 auth.post('/login', [urlParse, jsonParse], function(req, res){
-  
-  
+
+
   try {
     User.findOne({email:req.body.email}).exec()
     .then(function(user){
@@ -62,7 +62,7 @@ auth.post('/login', [urlParse, jsonParse], function(req, res){
             if (err) { return res.status(500).send({status: 500,message: err.message}); }
             return res.send({token: token});
           });
-          
+
         });
       }else{
         return res.status(401).send({status: 401,message: 'User not found.'});
@@ -73,22 +73,24 @@ auth.post('/login', [urlParse, jsonParse], function(req, res){
   } catch(e) {
     console.log(e)
   }
-  
+
 });
 
 // register new login credentials
 auth.post('/register', [urlParse, jsonParse], function(req, res){
-  try {
-    var user = new User({
+	console.log(req.body)
+
+  var user = new User({
     email: req.body.email,
     password: req.body.password
   });
+  console.log(user)
   user.save(function(err, u){
     if (err){
       err.status=500;
       return res.status(500).send(err);
     }
-    
+
     var verify = new Verify({user: user});
     verify.save();
 
@@ -98,10 +100,8 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
 
     return res.send({'verify':verify.code});
   });
-} catch(e) {
-  console.log(e)
-}
-  
+
+
 });
 
 // verify a user
@@ -131,5 +131,5 @@ auth.get('/user', auth.requireToken, function(req, res){
 
 // request a verify-reissue
 auth.post('/reissue', [urlParse, jsonParse], function(req,res){
-  
+
 });

@@ -7,7 +7,7 @@ class Products {
 
 	static getAll(cb) {
 		server.get('/products', function (err, data) {
-			console.log(data.body)
+			cb (err, data)
 		})
 	}
 }

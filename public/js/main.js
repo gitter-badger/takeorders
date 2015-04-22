@@ -278,6 +278,7 @@ var formLogin = React.createClass({
 
 		event.preventDefault();
 		if (validator.email(this.state.email)) {
+			console.log(this.state.email);
 			Server.register(this.state.email, this.state.pass, function (err, data) {
 				_this.setState({ verify: '/verify/' + data });
 			});
@@ -510,6 +511,7 @@ var Server = (function () {
 		key: 'register',
 		value: function register(email, password, cb) {
 			request.post('/auth/register').send({ email: email, password: password }).end(function (err, res) {
+				console.log(err);
 				if (err) {
 					return cb(err);
 				}
@@ -521,7 +523,6 @@ var Server = (function () {
 		value: function login(email, password, cb) {
 			request.post('/auth/login').send({ email: email, password: password }).end(function (err, res) {
 				if (err) {
-					console.log(err);
 					return cb(err);
 				}
 				localStorage.token = res.body.token;
@@ -559,7 +560,7 @@ var Products = (function () {
 		key: 'getAll',
 		value: function getAll(cb) {
 			server.get('/products', function (err, data) {
-				console.log(data.body);
+				cb(err, data);
 			});
 		}
 	}]);
@@ -853,7 +854,9 @@ var MyView = React.createClass({
 	displayName: 'MyView',
 
 	getInitialState: function getInitialState() {
-		Products.getAll(function () {});
+		Products.getAll(function (err, data) {
+			console.log(data.body);
+		});
 		return {};
 	},
 	logout: function logout() {

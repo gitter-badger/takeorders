@@ -10,7 +10,9 @@ var Products = require('../libs/products.js');
 
 var MyView = React.createClass({
 	getInitialState: function () {
-		Products.getAll(function(){});
+			Products.getAll(function (err, data){
+				console.log(data.body)
+			});
 			return {
 
 			};

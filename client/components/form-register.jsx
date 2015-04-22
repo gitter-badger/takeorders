@@ -29,6 +29,7 @@ var formLogin = React.createClass({
 
 		event.preventDefault();
 		if (validator.email(this.state.email)) {
+			console.log(this.state.email)
 			Server.register(this.state.email, this.state.pass, (err, data) => {
 			this.setState({verify: '/verify/' + data})
 		})
