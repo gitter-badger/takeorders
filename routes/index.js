@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+
+
 var JWT = require('jwt-async');
 var jwt = new JWT({
   crypto: {
@@ -9,12 +11,6 @@ var jwt = new JWT({
   }
 });
 
-// var auth = require('../libs/auth.js');
-
-// router.get('/auth', function (req, res) {
-// 	console.log(req.headers)
-// 	res.sendStatus(200)
-// });
 
 function requireToken (req, res, next){
   var token;
