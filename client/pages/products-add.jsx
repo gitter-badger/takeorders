@@ -5,7 +5,7 @@ var ReactTransitionGroup = React.addons.CSSTransitionGroup;
 var Server = require('../libs/auth.js');
 var Navbar = require('../components/navbar.jsx');
 var NavbarSide = require('../components/navbar-side.jsx');
-
+var FormProducts = require('../components/form-products.jsx');
 
 var MyView = React.createClass({
 	getInitialState: function () {
@@ -26,7 +26,7 @@ var MyView = React.createClass({
 				<ReactTransitionGroup transitionName="example" transitionAppear={true}>
 				<div className="flex-column">
 				<h4>Productos</h4>
-				<p>Aun no hay productos cargados</p>
+				<FormProducts />
 				</div>
 				</ReactTransitionGroup>
 				</div>
@@ -36,8 +36,3 @@ var MyView = React.createClass({
 });
 
 module.exports = React.createFactory(MyView);
-
-
-
-
-

@@ -75,7 +75,7 @@ nav {
 
 .example-appear {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
+  transition: opacity .4s ease-in;
 }
 
 .example-appear.example-appear-active {

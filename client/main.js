@@ -71,6 +71,18 @@ page('/admin/products', function (ctx) {
 	})
 });
 
+page('/admin/products/add', function (ctx) {
+	var productsAdd = require('./pages/products-add.jsx');
+	Server.get('/auth/user', (err, res) => {
+		if (err) {
+			console.log(err)
+			page('/');
+		} else {
+			React.render(productsAdd({email: res.body.email}), content);
+		}
+	})
+});
+
 page.start()
 
 
