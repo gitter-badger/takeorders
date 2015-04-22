@@ -3,13 +3,14 @@ var React = require('react/addons');
 var ReactTransitionGroup = React.addons.CSSTransitionGroup;
 
 var Server = require('../libs/auth.js');
+
 var Navbar = require('../components/navbar.jsx');
 var NavbarSide = require('../components/navbar-side.jsx');
-
+var Products = require('../libs/products.js');
 
 var MyView = React.createClass({
 	getInitialState: function () {
-
+		Products.getAll(function(){});
 			return {
 
 			};

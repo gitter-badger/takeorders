@@ -27,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', auth);
 
+app.use(routes);
+
 app.get('*', function (req, res) {
     return res.sendFile(__dirname + '/public/index.html')
 })
