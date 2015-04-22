@@ -181,70 +181,100 @@ var formLogin = React.createClass({
 module.exports = formLogin;
 
 },{"../libs/auth.js":7,"../libs/validations.js":9,"page":18,"react":193}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var React = require("react");
+var React = require('react');
+
+var Products = require('../libs/products.js');
 
 var FormProducts = React.createClass({
-	displayName: "FormProducts",
+	displayName: 'FormProducts',
 
+	getInitialState: function getInitialState() {
+		return {
+			name: '',
+			desc: '',
+			total: ''
+		};
+	},
+	newProducts: function newProducts() {
+		var _this = this;
+
+		event.preventDefault();
+		var obj = { name: this.state.name, desc: this.state.desc, total: this.state.total };
+		Products.newProduct(obj, function (err, data) {
+			console.log(data.body);
+			_this.setState({ name: '' });
+			_this.setState({ desc: '' });
+			_this.setState({ total: '' });
+		});
+	},
+	handleInputName: function handleInputName(ev) {
+		this.setState({ name: ev.target.value });
+	},
+	handleInputDesc: function handleInputDesc(ev) {
+		this.setState({ desc: ev.target.value });
+	},
+	handleInputTotal: function handleInputTotal(ev) {
+		this.setState({ total: ev.target.value });
+	},
 	render: function render() {
 		return React.createElement(
-			"form",
+			'form',
 			null,
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"label",
-					{ htmlFor: "email" },
-					"Nombre"
+					'label',
+					null,
+					'Nombre'
 				),
-				React.createElement("input", { className: "u-full-width", type: "text", placeholder: "Tomaco" })
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
 			),
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"label",
-					{ htmlFor: "pass" },
-					"Description"
+					'label',
+					null,
+					'Descripcion'
 				),
-				React.createElement("input", { className: "u-full-width", type: "text" })
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.desc, onChange: this.handleInputDesc })
 			),
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"label",
-					{ htmlFor: "pass" },
-					"Cantidad"
+					'label',
+					null,
+					'Cantidad'
 				),
-				React.createElement("input", { className: "u-full-width", type: "text" })
+				React.createElement('input', { className: 'u-full-width', type: 'number', value: this.state.total, onChange: this.handleInputTotal })
 			),
 			React.createElement(
-				"div",
+				'div',
 				null,
 				React.createElement(
-					"label",
-					{ htmlFor: "pass" },
-					"Imagen"
+					'label',
+					{ htmlFor: 'pass' },
+					'Imagen'
 				),
-				React.createElement("input", { className: "u-full-width", type: "file" })
+				React.createElement('input', { className: 'u-full-width', type: 'file' })
 			),
 			React.createElement(
-				"div",
+				'div',
 				null,
-				React.createElement("input", { className: "button-primary", type: "submit", value: "Agregar" })
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Agregar', onClick: this.newProducts })
 			),
-			React.createElement("div", null)
+			React.createElement('div', null)
 		);
 	}
 });
 
 module.exports = FormProducts;
 
-},{"react":193}],4:[function(require,module,exports){
+},{"../libs/products.js":8,"react":193}],4:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -493,6 +523,21 @@ var Server = (function () {
 	}
 
 	_createClass(Server, null, [{
+		key: 'post',
+		value: function post(url, data, cb) {
+			if (localStorage.token) {
+				request.post(url).authBearer(localStorage.token).send(data).end(function (err, res) {
+					if (err) {
+						cb(err);
+					}
+					cb(null, res);
+				});
+			} else {
+				alert('Para realizar esta accion, debes loguearte');
+				page('/');
+			}
+		}
+	}, {
 		key: 'get',
 		value: function get(url, cb) {
 			if (localStorage.token) {
@@ -561,6 +606,13 @@ var Products = (function () {
 		value: function getAll(cb) {
 			server.get('/products', function (err, data) {
 				cb(err, data);
+			});
+		}
+	}, {
+		key: 'newProduct',
+		value: function newProduct(ops, cb) {
+			server.post('/products', ops, function (err, data) {
+				return cb(err, data);
 			});
 		}
 	}]);

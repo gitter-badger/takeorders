@@ -7,11 +7,11 @@ var Navbar = require('../components/navbar.jsx');
 var NavbarSide = require('../components/navbar-side.jsx');
 var FormProducts = require('../components/form-products.jsx');
 
+
 var MyView = React.createClass({
 	getInitialState: function () {
 
 			return {
-
 			};
 	},
 	logout: function () {

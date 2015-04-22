@@ -10,6 +10,24 @@ class Server {
 
 	}
 
+	static post (url, data, cb) {
+		if (localStorage.token) {
+			request
+				.post(url)
+			  	.authBearer(localStorage.token)
+			  	.send(data)
+			  	.end((err,res) => {
+			    	if (err) {
+			    		cb(err);
+			    	}
+			    	cb(null, res)
+			 	})
+		} else {
+			alert('Para realizar esta accion, debes loguearte');
+			page('/');
+		}
+	}
+
 	static get(url, cb) {
 		if (localStorage.token) {
 			request

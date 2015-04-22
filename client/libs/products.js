@@ -10,6 +10,12 @@ class Products {
 			cb (err, data)
 		})
 	}
+
+	static newProduct(ops, cb) {
+		server.post('/products', ops, function (err, data) {
+			return cb(err, data)
+		})
+	}
 }
 
 module.exports = Products;
