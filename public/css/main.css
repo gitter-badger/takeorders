@@ -56,28 +56,30 @@ body {
 	-webkit-transition: -webkit-transform 300ms ease-out, opacity 300ms ease-out;
 }
 #content.transition {
-  -webkit-transform: translateX(100px);
-  opacity: 0;
+	-webkit-transform: translateX(100px);
+	opacity: 0;
 }
 
 .contenedor {
-  display: -webkit-flex;
-  display: flex;
+	display: -webkit-flex;
+	display: flex;
 }
 
 nav {
-  width: 200px;
+	width: 200px;
 }
 .flex-column {
-  -webkit-flex: 1;
-          flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
 }
 
 .example-appear {
-  opacity: 0.01;
-  transition: opacity .4s ease-in;
+	opacity: 0.01;
+	transition: opacity .4s ease-in;
 }
 
 .example-appear.example-appear-active {
-  opacity: 1;
+	opacity: 1;
 }
+
+

@@ -1,6 +1,6 @@
 var React = require('react');
-
 var Products = require('../libs/products.js');
+
 
 var FormProducts = React.createClass({
 	getInitialState: function () {
@@ -15,9 +15,9 @@ var FormProducts = React.createClass({
 		var obj = {name: this.state.name, desc: this.state.desc, total: this.state.total};
 		Products.newProduct(obj, (err, data) => {
 			console.log(data.body)
-			this.setState({name: ''})
-			this.setState({desc: ''})
-			this.setState({total: ''})
+			this.setState({name: ''});
+			this.setState({desc: ''});
+			this.setState({total: ''});
 		})
 
 	},

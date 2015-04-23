@@ -184,7 +184,6 @@ module.exports = formLogin;
 'use strict';
 
 var React = require('react');
-
 var Products = require('../libs/products.js');
 
 var FormProducts = React.createClass({
