@@ -45,9 +45,16 @@ router.get('/products', requireToken, function (req, res) {
 
 router.post('/products', requireToken, function (req, res) {
 
-	var products = new Products({name: 'nombre'});
+	var products = new Products({
+		user: req.user._id,
+		name: req.body.name,
+		desc: req.body.desc,
+		total: req.body.total
+	});
 
 	products.save(function(err, u) {
+		console.log(u)
+		console.log(err)
 		if (err) {
 			console.log(err)
 			err.status = 500;
