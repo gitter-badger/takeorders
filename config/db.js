@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var mockgoose = require('mockgoose');
 
-var mongo_url = process.env.MONGO_URI || process.env.MONGOLAB_URI;
+var mongo_url = process.env.MONGO_URI ||  'mongodb://takeorders:takeorders@ds061258.mongolab.com:61258/takeorders';
 
 if (!mongo_url) {
 	mockgoose(mongoose);

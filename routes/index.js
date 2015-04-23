@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var Products = require('../models/products.js');
+var User = require('../models/user.js');
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var JWT = require('jwt-async');
 var jwt = new JWT({
@@ -35,11 +39,15 @@ function requireToken (req, res, next){
 };
 
 router.get('/products', requireToken, function (req, res) {
-	res.send([{sara: 'connor'}]);
-	console.log(Products)
-	Products.find({}, function (err, d) {
-		console.log(d)
-		console.log(err)
+	Products.find({user: req.user._id}, function (err, prods) {
+		User.populate(prods, {path: 'user'}, function (err, prods) {
+			if (err) {
+				console.log(err)
+				err.status = 500;
+				return res.status(500).send(err);
+			}
+			res.send(prods)
+		})
 	});
 });
 
