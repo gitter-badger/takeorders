@@ -13,13 +13,8 @@ var Products = require('../libs/products.js');
 var MyView = React.createClass({
 	getInitialState: function () {
 			return {
-				products: [{}]
+
 			};
-	},
-	componentDidMount: function() {
-		Products.getAll((err, data) => {
-			this.setState({products: data.body})
-		})
 	},
 	logout: function () {
 		Server.logout();
@@ -33,7 +28,7 @@ var MyView = React.createClass({
 				<ReactTransitionGroup transitionName="example" transitionAppear={true}>
 				<div className="flex-column">
 				<h4>Productos</h4>
-				<TableProducts products={this.state.products}/>
+				<TableProducts />
 				</div>
 				</ReactTransitionGroup>
 				</div>

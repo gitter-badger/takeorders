@@ -74,5 +74,9 @@ router.post('/products', requireToken, function (req, res) {
 
 });
 
+router.delete('/products/:id', requireToken, function (req, res) {
+	console.log(req.params.id)
+	res.send([{_id: req.params.id}])
+});
 
 module.exports = router;

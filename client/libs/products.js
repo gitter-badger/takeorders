@@ -16,6 +16,12 @@ class Products {
 			return cb(err, data)
 		})
 	}
+
+	static delete(ops, cb) {
+		server.delete('/products/' + ops._id, {}, function (err, data) {
+			return cb(err, data);
+		})
+	}
 }
 
 module.exports = Products;

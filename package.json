@@ -26,6 +26,7 @@
     "ejs": "~2.1.4",
     "express": "~4.11.0",
     "jwt-async": "^1.1.2",
+    "lodash": "^3.7.0",
     "mongoose": "^3.8.0",
     "mongoose-bcrypt": "^1.1.1",
     "mongoose-type-email": "^1.0.0",
