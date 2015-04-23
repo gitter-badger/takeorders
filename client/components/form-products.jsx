@@ -14,6 +14,10 @@ var FormProducts = React.createClass({
 		event.preventDefault();
 		var obj = {name: this.state.name, desc: this.state.desc, total: this.state.total};
 		Products.newProduct(obj, (err, data) => {
+			if (err) {
+
+			console.log(err)
+			}
 			console.log(data.body)
 			this.setState({name: ''});
 			this.setState({desc: ''});

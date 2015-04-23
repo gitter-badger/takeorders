@@ -85,6 +85,7 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
     password: req.body.password
   });
   console.log(user)
+
   user.save(function(err, u){
     if (err){
       err.status=500;

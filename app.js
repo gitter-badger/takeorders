@@ -5,9 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
 
 require('./config/db.js');
+
+var routes = require('./routes/index');
 
 var auth = require('./libs/auth.js');
 
@@ -16,7 +17,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -70,9 +70,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
-return {
-    log: function(what) {
-        console.log(what);
-    }
-}

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
+var Products = require('../models/products.js');
 
 var JWT = require('jwt-async');
 var jwt = new JWT({
@@ -36,11 +36,28 @@ function requireToken (req, res, next){
 
 router.get('/products', requireToken, function (req, res) {
 	res.send([{sara: 'connor'}]);
+	console.log(Products)
+	Products.find({}, function (err, d) {
+		console.log(d)
+		console.log(err)
+	});
 });
 
 router.post('/products', requireToken, function (req, res) {
-	console.log(req.body)
-	res.send([req.body]);
+
+	var products = new Products({name: 'nombre'});
+
+	products.save(function(err, u) {
+		if (err) {
+			console.log(err)
+			err.status = 500;
+      		return res.status(500).send(err);
+		}
+		console.log('Guardado ok')
+		return res.send([req.body]);
+	});
+
 });
+
 
 module.exports = router;

@@ -2,24 +2,6 @@ var React = require('react');
 var page = require('page');
 var Server = require('./libs/auth.js');
 
-// var content = document.getElementById('content');
-
-// function transition (ctx, next) {
-// 	if (ctx.init) {
-// 		next();
-// 	} else {
-// 		content.classList.add('transition');
-// 	    setTimeout(function(){
-// 	      content.classList.remove('transition');
-// 	      next();
-// 	    }, 300);
-// 	}
-// }
-// page('*', function(ctx,  next){
-
-//   }
-// })
-
 page('/', function () {
 	var hello = require('./pages/landing.jsx');
 	React.render(hello(), content);
