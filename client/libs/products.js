@@ -24,7 +24,7 @@ class Products {
 	}
 
 	static edit(ops, cb) {
-		server.put('/products/' + ops._id, {}, function (err, data) {
+		server.put('/products/' + ops._id, ops, function (err, data) {
 			return cb(err, data);
 		})
 	}

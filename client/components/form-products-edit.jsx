@@ -1,6 +1,6 @@
 var React = require('react');
 var Products = require('../libs/products.js');
-
+var page = require('page')
 
 var FormProducts = React.createClass({
 	getInitialState: function () {
@@ -10,18 +10,27 @@ var FormProducts = React.createClass({
 			total: ''
 	    };
 	},
+	componentDidMount: function() {
+		this.setState({name:this.props.product.name});
+		this.setState({desc:this.props.product.desc});
+		this.setState({total: this.props.product.total});
+	},
 	editProducts : function () {
 		event.preventDefault();
-		var obj = {name: this.state.name, desc: this.state.desc, total: this.state.total};
+
+		var obj = {_id: this.props.product._id,
+					name: this.state.name,
+					desc: this.state.desc,
+					total: this.state.total};
+
+					console.log(obj)
+
 		Products.edit(obj, (err, data) => {
 			if (err) {
 
 			console.log(err)
 			}
-			console.log(data.body)
-			this.setState({name: ''});
-			this.setState({desc: ''});
-			this.setState({total: ''});
+			page('/admin/products');
 		})
 
 	},
@@ -39,17 +48,17 @@ var FormProducts = React.createClass({
             <form>
 				<div>
 					<label>Nombre</label>
-					<input className="u-full-width" type="text" value={this.state.name || this.props.product.name} onChange={this.handleInputName}/>
+					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
 				</div>
 
 				<div>
 					<label>Descripcion</label>
-					<input className="u-full-width" type="text" value={this.state.desc || this.props.product.desc} onChange={this.handleInputDesc} />
+					<input className="u-full-width" type="text" value={this.state.desc} onChange={this.handleInputDesc} />
 				</div>
 
 				<div>
 					<label>Cantidad</label>
-					<input className="u-full-width" type="number" value={this.state.total || this.props.product.total} onChange={this.handleInputTotal} />
+					<input className="u-full-width" type="number" value={this.state.total} onChange={this.handleInputTotal} />
 				</div>
 
 				<div>

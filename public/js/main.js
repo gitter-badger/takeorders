@@ -181,6 +181,7 @@ module.exports = formLogin;
 
 var React = require('react');
 var Products = require('../libs/products.js');
+var page = require('page');
 
 var FormProducts = React.createClass({
 	displayName: 'FormProducts',
@@ -192,20 +193,27 @@ var FormProducts = React.createClass({
 			total: ''
 		};
 	},
+	componentDidMount: function componentDidMount() {
+		this.setState({ name: this.props.product.name });
+		this.setState({ desc: this.props.product.desc });
+		this.setState({ total: this.props.product.total });
+	},
 	editProducts: function editProducts() {
-		var _this = this;
-
 		event.preventDefault();
-		var obj = { name: this.state.name, desc: this.state.desc, total: this.state.total };
+
+		var obj = { _id: this.props.product._id,
+			name: this.state.name,
+			desc: this.state.desc,
+			total: this.state.total };
+
+		console.log(obj);
+
 		Products.edit(obj, function (err, data) {
 			if (err) {
 
 				console.log(err);
 			}
-			console.log(data.body);
-			_this.setState({ name: '' });
-			_this.setState({ desc: '' });
-			_this.setState({ total: '' });
+			page('/admin/products');
 		});
 	},
 	handleInputName: function handleInputName(ev) {
@@ -229,7 +237,7 @@ var FormProducts = React.createClass({
 					null,
 					'Nombre'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name || this.props.product.name, onChange: this.handleInputName })
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
 			),
 			React.createElement(
 				'div',
@@ -239,7 +247,7 @@ var FormProducts = React.createClass({
 					null,
 					'Descripcion'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.desc || this.props.product.desc, onChange: this.handleInputDesc })
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.desc, onChange: this.handleInputDesc })
 			),
 			React.createElement(
 				'div',
@@ -249,7 +257,7 @@ var FormProducts = React.createClass({
 					null,
 					'Cantidad'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'number', value: this.state.total || this.props.product.total, onChange: this.handleInputTotal })
+				React.createElement('input', { className: 'u-full-width', type: 'number', value: this.state.total, onChange: this.handleInputTotal })
 			),
 			React.createElement(
 				'div',
@@ -273,7 +281,7 @@ var FormProducts = React.createClass({
 
 module.exports = FormProducts;
 
-},{"../libs/products.js":10,"react":197}],4:[function(require,module,exports){
+},{"../libs/products.js":10,"page":22,"react":197}],4:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -874,7 +882,7 @@ var Products = (function () {
 	}, {
 		key: 'edit',
 		value: function edit(ops, cb) {
-			server.put('/products/' + ops._id, {}, function (err, data) {
+			server.put('/products/' + ops._id, ops, function (err, data) {
 				return cb(err, data);
 			});
 		}

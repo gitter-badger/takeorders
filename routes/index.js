@@ -88,7 +88,9 @@ router.post('/products', requireToken, function (req, res) {
 
 });
 
-router.put('/products:/:id', requireToken, function (req, res) {
+router.put('/products/:id', requireToken, function (req, res) {
+
+	console.log("Putttttttttttt")
 
 	Products.findOne({_id: req.params.id}, function (err, pro) {
 		pro.user = req.user._id;
