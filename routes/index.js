@@ -76,7 +76,15 @@ router.post('/products', requireToken, function (req, res) {
 
 router.delete('/products/:id', requireToken, function (req, res) {
 	console.log(req.params.id)
-	res.send([{_id: req.params.id}])
+	Products.remove({_id: req.params.id}, function (err, pro) {
+		if (err) {
+			console.log(err)
+			err.status = 500;
+      		return res.status(500).send(err);
+		}
+		console.log('borrado ok');
+		res.send([{_id: req.params.id}])
+	})
 });
 
 module.exports = router;
