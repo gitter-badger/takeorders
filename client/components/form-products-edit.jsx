@@ -1,0 +1,70 @@
+var React = require('react');
+var Products = require('../libs/products.js');
+
+
+var FormProducts = React.createClass({
+	getInitialState: function () {
+	    return {
+			name: '',
+			desc: '',
+			total: ''
+	    };
+	},
+	editProducts : function () {
+		event.preventDefault();
+		var obj = {name: this.state.name, desc: this.state.desc, total: this.state.total};
+		Products.edit(obj, (err, data) => {
+			if (err) {
+
+			console.log(err)
+			}
+			console.log(data.body)
+			this.setState({name: ''});
+			this.setState({desc: ''});
+			this.setState({total: ''});
+		})
+
+	},
+	handleInputName: function (ev) {
+		this.setState({name: ev.target.value})
+	},
+	handleInputDesc: function (ev) {
+		this.setState({desc: ev.target.value})
+	},
+	handleInputTotal: function (ev) {
+		this.setState({total: ev.target.value})
+	},
+   	render: function () {
+        return (
+            <form>
+				<div>
+					<label>Nombre</label>
+					<input className="u-full-width" type="text" value={this.state.name || this.props.product.name} onChange={this.handleInputName}/>
+				</div>
+
+				<div>
+					<label>Descripcion</label>
+					<input className="u-full-width" type="text" value={this.state.desc || this.props.product.desc} onChange={this.handleInputDesc} />
+				</div>
+
+				<div>
+					<label>Cantidad</label>
+					<input className="u-full-width" type="number" value={this.state.total || this.props.product.total} onChange={this.handleInputTotal} />
+				</div>
+
+				<div>
+					<label htmlFor="pass">Imagen</label>
+					<input className="u-full-width" type="file"  />
+				</div>
+
+				<div>
+					<input className="button-primary" type="submit" value="Agregar" onClick={this.editProducts}/>
+				</div>
+				<div>
+				</div>
+			</form>
+        );
+    }
+});
+
+module.exports = FormProducts;

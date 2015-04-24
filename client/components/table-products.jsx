@@ -46,11 +46,12 @@ var table = React.createClass({
 				 </thead>
 				 <tbody>
 				{this.state.products.map((prod) => {
+					var href = '/admin/products/' + prod._id;
 					return (<tr>
 								<td>{prod.name}</td>
 								<td>{prod.desc}</td>
 								<td>{prod.total}</td>
-								<td><button className="button-primary">Editar</button> <button id={prod._id} onClick={this.deleteProduct}>Borrar</button></td>
+								<td><a href={href} className="button button-primary">Editar</a> <button id={prod._id} onClick={this.deleteProduct}>Borrar</button></td>
 							</tr>)
 				})}
 				</tbody>

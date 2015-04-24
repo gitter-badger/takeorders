@@ -65,6 +65,20 @@ page('/admin/products/add', function (ctx) {
 	})
 });
 
+page('/admin/products/:id', function (ctx) {
+	var id = ctx.params.id;
+	var productsEdit = require('./pages/products-edit.jsx');
+	Server.get('/products/' + id , (err, res) => {
+		if (err) {
+			console.log(err)
+			page('/');
+		} else {
+			console.log(res.body)
+			React.render(productsEdit({product: res.body}), content);
+		}
+	})
+});
+
 page.start()
 
 

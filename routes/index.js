@@ -51,6 +51,20 @@ router.get('/products', requireToken, function (req, res) {
 	});
 });
 
+router.get('/products/:id', requireToken, function (req, res) {
+	Products.findOne({user: req.user._id, _id: req.params.id}, function (err, prods) {
+		User.populate(prods, {path: 'user'}, function (err, prods) {
+			if (err) {
+				console.log(err)
+				err.status = 500;
+				return res.status(500).send(err);
+			}
+			console.log(prods)
+			res.send(prods)
+		})
+	});
+});
+
 router.post('/products', requireToken, function (req, res) {
 
 	var products = new Products({
@@ -74,6 +88,28 @@ router.post('/products', requireToken, function (req, res) {
 
 });
 
+router.put('/products:/:id', requireToken, function (req, res) {
+
+	Products.findOne({_id: req.params.id}, function (err, pro) {
+		pro.user = req.user._id;
+		pro.name = req.body.name;
+		pro.desc = req.body.desc;
+		pro.total = req.body.total;
+
+		pro.save(function (err, dat) {
+			if (err) {
+				console.log(err)
+				err.status = 500;
+	      		return res.status(500).send(err);
+			}
+			res.send([pro]);
+		})
+	})
+
+
+});
+
+
 router.delete('/products/:id', requireToken, function (req, res) {
 	console.log(req.params.id)
 	Products.remove({_id: req.params.id}, function (err, pro) {
@@ -86,5 +122,6 @@ router.delete('/products/:id', requireToken, function (req, res) {
 		res.send([{_id: req.params.id}])
 	})
 });
+
 
 module.exports = router;

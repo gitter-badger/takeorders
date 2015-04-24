@@ -28,6 +28,24 @@ class Server {
 		}
 	}
 
+	static put (url, data, cb) {
+		if (localStorage.token) {
+			request
+				.put(url)
+			  	.authBearer(localStorage.token)
+			  	.send(data)
+			  	.end((err,res) => {
+			    	if (err) {
+			    		cb(err);
+			    	}
+			    	cb(null, res)
+			 	})
+		} else {
+			alert('Para realizar esta accion, debes loguearte');
+			page('/');
+		}
+	}
+
 	static delete(url, data, cb) {
 		if (localStorage.token) {
 			request
