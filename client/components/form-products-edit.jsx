@@ -7,12 +7,14 @@ var FormProducts = React.createClass({
 	    return {
 			name: '',
 			desc: '',
+			brand: '',
 			total: ''
 	    };
 	},
 	componentDidMount: function() {
 		this.setState({name:this.props.product.name});
 		this.setState({desc:this.props.product.desc});
+		this.setState({brand: this.props.product.brand});
 		this.setState({total: this.props.product.total});
 	},
 	editProducts : function () {
@@ -21,6 +23,7 @@ var FormProducts = React.createClass({
 		var obj = {_id: this.props.product._id,
 					name: this.state.name,
 					desc: this.state.desc,
+					brand: this.state.brand,
 					total: this.state.total};
 
 					console.log(obj)
@@ -40,6 +43,9 @@ var FormProducts = React.createClass({
 	handleInputDesc: function (ev) {
 		this.setState({desc: ev.target.value})
 	},
+	handleInputBrand: function (ev) {
+		this.setState({brand: ev.target.value})
+	},
 	handleInputTotal: function (ev) {
 		this.setState({total: ev.target.value})
 	},
@@ -49,6 +55,11 @@ var FormProducts = React.createClass({
 				<div>
 					<label>Nombre</label>
 					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
+				</div>
+				
+				<div>
+					<label>Marca</label>
+					<input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>
 				</div>
 
 				<div>
@@ -67,7 +78,7 @@ var FormProducts = React.createClass({
 				</div>
 
 				<div>
-					<input className="button-primary" type="submit" value="Agregar" onClick={this.editProducts}/>
+					<input className="button-primary" type="submit" value="Guardar" onClick={this.editProducts}/>
 				</div>
 				<div>
 				</div>

@@ -190,12 +190,14 @@ var FormProducts = React.createClass({
 		return {
 			name: '',
 			desc: '',
+			brand: '',
 			total: ''
 		};
 	},
 	componentDidMount: function componentDidMount() {
 		this.setState({ name: this.props.product.name });
 		this.setState({ desc: this.props.product.desc });
+		this.setState({ brand: this.props.product.brand });
 		this.setState({ total: this.props.product.total });
 	},
 	editProducts: function editProducts() {
@@ -204,6 +206,7 @@ var FormProducts = React.createClass({
 		var obj = { _id: this.props.product._id,
 			name: this.state.name,
 			desc: this.state.desc,
+			brand: this.state.brand,
 			total: this.state.total };
 
 		console.log(obj);
@@ -222,6 +225,9 @@ var FormProducts = React.createClass({
 	handleInputDesc: function handleInputDesc(ev) {
 		this.setState({ desc: ev.target.value });
 	},
+	handleInputBrand: function handleInputBrand(ev) {
+		this.setState({ brand: ev.target.value });
+	},
 	handleInputTotal: function handleInputTotal(ev) {
 		this.setState({ total: ev.target.value });
 	},
@@ -238,6 +244,16 @@ var FormProducts = React.createClass({
 					'Nombre'
 				),
 				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'label',
+					null,
+					'Marca'
+				),
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.brand, onChange: this.handleInputBrand })
 			),
 			React.createElement(
 				'div',
@@ -272,7 +288,7 @@ var FormProducts = React.createClass({
 			React.createElement(
 				'div',
 				null,
-				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Agregar', onClick: this.editProducts })
+				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Guardar', onClick: this.editProducts })
 			),
 			React.createElement('div', null)
 		);
@@ -294,6 +310,7 @@ var FormProducts = React.createClass({
 		return {
 			name: '',
 			desc: '',
+			brand: '',
 			total: ''
 		};
 	},
@@ -301,7 +318,11 @@ var FormProducts = React.createClass({
 		var _this = this;
 
 		event.preventDefault();
-		var obj = { name: this.state.name, desc: this.state.desc, total: this.state.total };
+		var obj = { name: this.state.name,
+			desc: this.state.desc,
+			total: this.state.total,
+			brand: this.state.brand
+		};
 		Products.newProduct(obj, function (err, data) {
 			if (err) {
 
@@ -310,6 +331,7 @@ var FormProducts = React.createClass({
 			console.log(data.body);
 			_this.setState({ name: '' });
 			_this.setState({ desc: '' });
+			_this.setState({ brand: '' });
 			_this.setState({ total: '' });
 		});
 	},
@@ -321,6 +343,9 @@ var FormProducts = React.createClass({
 	},
 	handleInputTotal: function handleInputTotal(ev) {
 		this.setState({ total: ev.target.value });
+	},
+	handleInputBrand: function handleInputBrand(ev) {
+		this.setState({ brand: ev.target.value });
 	},
 	render: function render() {
 		return React.createElement(
@@ -335,6 +360,16 @@ var FormProducts = React.createClass({
 					'Nombre'
 				),
 				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
+			),
+			React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'label',
+					null,
+					'Marca'
+				),
+				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.brand, onChange: this.handleInputBrand })
 			),
 			React.createElement(
 				'div',
@@ -670,6 +705,11 @@ var table = React.createClass({
 					React.createElement(
 						'th',
 						null,
+						'Marca'
+					),
+					React.createElement(
+						'th',
+						null,
 						'Descripcion'
 					),
 					React.createElement(
@@ -696,6 +736,11 @@ var table = React.createClass({
 							'td',
 							null,
 							prod.name
+						),
+						React.createElement(
+							'td',
+							null,
+							prod.brand
 						),
 						React.createElement(
 							'td',
@@ -36102,7 +36147,7 @@ var reduce = require('reduce');
  */
 
 var root = 'undefined' == typeof window
-  ? this
+  ? (this || self)
   : window;
 
 /**
@@ -36141,7 +36186,8 @@ function isHost(obj) {
 
 request.getXHR = function () {
   if (root.XMLHttpRequest
-    && ('file:' != root.location.protocol || !root.ActiveXObject)) {
+      && (!root.location || 'file:' != root.location.protocol
+          || !root.ActiveXObject)) {
     return new XMLHttpRequest;
   } else {
     try { return new ActiveXObject('Microsoft.XMLHTTP'); } catch(e) {}
@@ -36477,6 +36523,11 @@ Response.prototype.parseBody = function(str){
  */
 
 Response.prototype.setStatusProperties = function(status){
+  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+  if (status === 1223) {
+    status = 204;
+  }
+
   var type = status / 100 | 0;
 
   // status / class
@@ -36494,7 +36545,7 @@ Response.prototype.setStatusProperties = function(status){
 
   // sugar
   this.accepted = 202 == status;
-  this.noContent = 204 == status || 1223 == status;
+  this.noContent = 204 == status;
   this.badRequest = 400 == status;
   this.unauthorized = 401 == status;
   this.notAcceptable = 406 == status;
@@ -37002,12 +37053,18 @@ Request.prototype.end = function(fn){
   };
 
   // progress
+  var handleProgress = function(e){
+    if (e.total > 0) {
+      e.percent = e.loaded / e.total * 100;
+    }
+    self.emit('progress', e);
+  };
+  if (this.hasListeners('progress')) {
+    xhr.onprogress = handleProgress;
+  }
   try {
     if (xhr.upload && this.hasListeners('progress')) {
-      xhr.upload.onprogress = function(e){
-        e.percent = e.loaded / e.total * 100;
-        self.emit('progress', e);
-      };
+      xhr.upload.onprogress = handleProgress;
     }
   } catch(e) {
     // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.

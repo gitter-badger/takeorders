@@ -71,6 +71,7 @@ router.post('/products', requireToken, function (req, res) {
 		user: req.user._id,
 		name: req.body.name,
 		desc: req.body.desc,
+		brand: req.body.brand,
 		total: req.body.total
 	});
 
@@ -90,12 +91,12 @@ router.post('/products', requireToken, function (req, res) {
 
 router.put('/products/:id', requireToken, function (req, res) {
 
-	console.log("Putttttttttttt")
 
 	Products.findOne({_id: req.params.id}, function (err, pro) {
 		pro.user = req.user._id;
 		pro.name = req.body.name;
 		pro.desc = req.body.desc;
+		pro.brand = req.body.brand;
 		pro.total = req.body.total;
 
 		pro.save(function (err, dat) {

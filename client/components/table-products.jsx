@@ -39,6 +39,7 @@ var table = React.createClass({
 				<thead>
 				    <tr>
 				      <th>Nombre</th>
+				      <th>Marca</th>
 				      <th>Descripcion</th>
 				      <th>Cantidad</th>
 				      <th>Accion</th>
@@ -49,6 +50,7 @@ var table = React.createClass({
 					var href = '/admin/products/' + prod._id;
 					return (<tr>
 								<td>{prod.name}</td>
+								<td>{prod.brand}</td>
 								<td>{prod.desc}</td>
 								<td>{prod.total}</td>
 								<td><a href={href} className="button button-primary">Editar</a> <button id={prod._id} onClick={this.deleteProduct}>Borrar</button></td>

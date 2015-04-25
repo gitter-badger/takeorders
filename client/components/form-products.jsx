@@ -7,12 +7,17 @@ var FormProducts = React.createClass({
 	    return {
 			name: '',
 			desc: '',
+			brand: '',
 			total: ''
 	    };
 	},
 	newProducts : function () {
 		event.preventDefault();
-		var obj = {name: this.state.name, desc: this.state.desc, total: this.state.total};
+		var obj = {	name: this.state.name, 
+					desc: this.state.desc, 
+					total: this.state.total, 
+					brand: this.state.brand
+				};
 		Products.newProduct(obj, (err, data) => {
 			if (err) {
 
@@ -21,6 +26,7 @@ var FormProducts = React.createClass({
 			console.log(data.body)
 			this.setState({name: ''});
 			this.setState({desc: ''});
+			this.setState({brand: ''});
 			this.setState({total: ''});
 		})
 
@@ -34,12 +40,20 @@ var FormProducts = React.createClass({
 	handleInputTotal: function (ev) {
 		this.setState({total: ev.target.value})
 	},
+	handleInputBrand: function (ev) {
+		this.setState({brand: ev.target.value})
+	},
    	render: function () {
         return (
             <form>
 				<div>
 					<label>Nombre</label>
 					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
+				</div>
+				
+				<div>
+					<label>Marca</label>
+					<input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>
 				</div>
 
 				<div>
