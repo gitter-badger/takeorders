@@ -8,12 +8,11 @@ var FormProducts = React.createClass({
 			name: '',
 			desc: '',
 			brand: '',
-			total: ''
 	    };
 	},
 	componentDidMount: function() {
-		this.setState({name:this.props.product.name});
-		this.setState({desc:this.props.product.desc});
+		this.setState({name: this.props.product.name});
+		this.setState({desc: this.props.product.desc});
 		this.setState({brand: this.props.product.brand});
 		this.setState({total: this.props.product.total});
 	},

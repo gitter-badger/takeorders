@@ -190,9 +190,7 @@ var FormProducts = React.createClass({
 		return {
 			name: '',
 			desc: '',
-			brand: '',
-			total: ''
-		};
+			brand: '' };
 	},
 	componentDidMount: function componentDidMount() {
 		this.setState({ name: this.props.product.name });
@@ -311,7 +309,8 @@ var FormProducts = React.createClass({
 			name: '',
 			desc: '',
 			brand: '',
-			total: ''
+			total: '',
+			image: ''
 		};
 	},
 	newProducts: function newProducts() {
@@ -346,6 +345,10 @@ var FormProducts = React.createClass({
 	},
 	handleInputBrand: function handleInputBrand(ev) {
 		this.setState({ brand: ev.target.value });
+	},
+	handleInputImage: function handleInputImage(ev) {
+		this.setState({ image: ev.target.value });
+		console.log(ev.target.value);
 	},
 	render: function render() {
 		return React.createElement(
@@ -399,7 +402,7 @@ var FormProducts = React.createClass({
 					{ htmlFor: 'pass' },
 					'Imagen'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'file' })
+				React.createElement('input', { className: 'u-full-width', type: 'file', value: this.state.image, onChange: this.handleInputImage })
 			),
 			React.createElement(
 				'div',

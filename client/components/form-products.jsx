@@ -8,7 +8,8 @@ var FormProducts = React.createClass({
 			name: '',
 			desc: '',
 			brand: '',
-			total: ''
+			total: '',
+			image: ''
 	    };
 	},
 	newProducts : function () {
@@ -43,6 +44,10 @@ var FormProducts = React.createClass({
 	handleInputBrand: function (ev) {
 		this.setState({brand: ev.target.value})
 	},
+	handleInputImage: function (ev) {
+		this.setState({image: ev.target.value})
+		console.log(ev.target.value)
+	},
    	render: function () {
         return (
             <form>
@@ -68,7 +73,7 @@ var FormProducts = React.createClass({
 
 				<div>
 					<label htmlFor="pass">Imagen</label>
-					<input className="u-full-width" type="file"  />
+					<input className="u-full-width" type="file"  value={this.state.image} onChange={this.handleInputImage}/>
 				</div>
 
 				<div>
