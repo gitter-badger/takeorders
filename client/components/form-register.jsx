@@ -7,9 +7,7 @@ var formLogin = React.createClass({
 
 	getInitialState: function () {
 	    return {
-	        email: '',
-	        pass: '',
-	        verify: ''
+	       
 	    };
 	},
 

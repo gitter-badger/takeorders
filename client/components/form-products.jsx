@@ -5,11 +5,7 @@ var Products = require('../libs/products.js');
 var FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
-			// name: '',
-			// desc: '',
-			// brand: '',
-			// total: '',
-			// image: {}
+			
 	    };
 	},
 	newProducts : function () {

@@ -5,9 +5,7 @@ var page = require('page')
 var FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
-			name: '',
-			desc: '',
-			brand: '',
+		
 	    };
 	},
 	componentDidMount: function() {
