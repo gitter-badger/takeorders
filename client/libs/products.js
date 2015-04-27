@@ -1,4 +1,5 @@
 var server = require('./auth.js');
+var request = require('superagent');
 
 class Products {
 	constructor () {
@@ -12,9 +13,28 @@ class Products {
 	}
 
 	static newProduct(ops, cb) {
-		server.post('/products', ops, function (err, data) {
-			return cb(err, data);
-		})
+		if (localStorage.token) {
+			request
+				.post('/products')
+			  	.authBearer(localStorage.token)
+			  	.field('name', ops.name)
+			  	.field('desc', ops.desc)
+			  	.field('total', ops.total)
+			  	.field('brand', ops.brand)
+			  	.attach('image', ops.image, ops.image.name)
+			  	.end((err,res) => {
+			    	if (err) {
+			    		cb(err);
+			    	}
+			    	cb(null, res)
+			 	})
+		} else {
+			alert('Para realizar esta accion, debes loguearte');
+			page('/');
+		}
+		// server.post('/products', ops, function (err, data) {
+		// 	return cb(err, data);
+		// })
 	}
 
 	static delete(ops, cb) {

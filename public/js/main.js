@@ -305,33 +305,30 @@ var FormProducts = React.createClass({
 	displayName: 'FormProducts',
 
 	getInitialState: function getInitialState() {
-		return {
-			name: '',
-			desc: '',
-			brand: '',
-			total: '',
-			image: ''
-		};
+		return {};
 	},
 	newProducts: function newProducts() {
 		var _this = this;
 
 		event.preventDefault();
+
 		var obj = { name: this.state.name,
 			desc: this.state.desc,
 			total: this.state.total,
-			brand: this.state.brand
+			brand: this.state.brand,
+			image: this.state.image
 		};
 		Products.newProduct(obj, function (err, data) {
 			if (err) {
 
 				console.log(err);
 			}
-			console.log(data.body);
+
 			_this.setState({ name: '' });
 			_this.setState({ desc: '' });
 			_this.setState({ brand: '' });
 			_this.setState({ total: '' });
+			_this.setState({ image: null });
 		});
 	},
 	handleInputName: function handleInputName(ev) {
@@ -347,8 +344,7 @@ var FormProducts = React.createClass({
 		this.setState({ brand: ev.target.value });
 	},
 	handleInputImage: function handleInputImage(ev) {
-		this.setState({ image: ev.target.value });
-		console.log(ev.target.value);
+		this.setState({ image: ev.target.files[0] });
 	},
 	render: function render() {
 		return React.createElement(
@@ -402,7 +398,7 @@ var FormProducts = React.createClass({
 					{ htmlFor: 'pass' },
 					'Imagen'
 				),
-				React.createElement('input', { className: 'u-full-width', type: 'file', value: this.state.image, onChange: this.handleInputImage })
+				React.createElement('input', { className: 'u-full-width', type: 'file', onChange: this.handleInputImage })
 			),
 			React.createElement(
 				'div',
@@ -415,6 +411,13 @@ var FormProducts = React.createClass({
 });
 
 module.exports = FormProducts;
+
+// name: '',
+// desc: '',
+// brand: '',
+// total: '',
+// image: {}
+// console.log(ev.target.files[0])
 
 },{"../libs/products.js":10,"react":197}],5:[function(require,module,exports){
 'use strict';
@@ -900,6 +903,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var server = require('./auth.js');
+var request = require('superagent');
 
 var Products = (function () {
 	function Products() {
@@ -916,9 +920,20 @@ var Products = (function () {
 	}, {
 		key: 'newProduct',
 		value: function newProduct(ops, cb) {
-			server.post('/products', ops, function (err, data) {
-				return cb(err, data);
-			});
+			if (localStorage.token) {
+				request.post('/products').authBearer(localStorage.token).field('name', ops.name).field('desc', ops.desc).field('total', ops.total).field('brand', ops.brand).attach('image', ops.image, ops.image.name).end(function (err, res) {
+					if (err) {
+						cb(err);
+					}
+					cb(null, res);
+				});
+			} else {
+				alert('Para realizar esta accion, debes loguearte');
+				page('/');
+			}
+			// server.post('/products', ops, function (err, data) {
+			// 	return cb(err, data);
+			// })
 		}
 	}, {
 		key: 'delete',
@@ -941,7 +956,7 @@ var Products = (function () {
 
 module.exports = Products;
 
-},{"./auth.js":9}],11:[function(require,module,exports){
+},{"./auth.js":9,"superagent":199}],11:[function(require,module,exports){
 "use strict";
 
 function isValidEmail(mail) {

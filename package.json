@@ -33,6 +33,7 @@
     "mongoose-type-email": "^1.0.0",
     "mongoose-type-relation": "^1.0.0",
     "morgan": "~1.5.1",
+    "multer": "^0.1.8",
     "notifyjs": "^1.2.5",
     "page": "^1.6.2",
     "react": "^0.13.1",

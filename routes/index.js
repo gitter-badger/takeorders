@@ -64,8 +64,14 @@ router.get('/products/:id', requireToken, function (req, res) {
 		})
 	});
 });
-
+router.post('/image', function (req, res) {
+	console.log(req.body)
+	console.log(req.files)
+})
 router.post('/products', requireToken, function (req, res) {
+
+	console.log(req.body)
+	console.log(req.files)
 
 	var products = new Products({
 		user: req.user._id,

@@ -5,30 +5,33 @@ var Products = require('../libs/products.js');
 var FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
-			name: '',
-			desc: '',
-			brand: '',
-			total: '',
-			image: ''
+			// name: '',
+			// desc: '',
+			// brand: '',
+			// total: '',
+			// image: {}
 	    };
 	},
 	newProducts : function () {
 		event.preventDefault();
+
 		var obj = {	name: this.state.name, 
 					desc: this.state.desc, 
 					total: this.state.total, 
-					brand: this.state.brand
+					brand: this.state.brand,
+					image: this.state.image
 				};
 		Products.newProduct(obj, (err, data) => {
 			if (err) {
 
 			console.log(err)
 			}
-			console.log(data.body)
+			
 			this.setState({name: ''});
 			this.setState({desc: ''});
 			this.setState({brand: ''});
 			this.setState({total: ''});
+			this.setState({image: null})
 		})
 
 	},
@@ -45,8 +48,8 @@ var FormProducts = React.createClass({
 		this.setState({brand: ev.target.value})
 	},
 	handleInputImage: function (ev) {
-		this.setState({image: ev.target.value})
-		console.log(ev.target.value)
+		this.setState({image: ev.target.files[0]})
+		// console.log(ev.target.files[0])
 	},
    	render: function () {
         return (
@@ -73,7 +76,7 @@ var FormProducts = React.createClass({
 
 				<div>
 					<label htmlFor="pass">Imagen</label>
-					<input className="u-full-width" type="file"  value={this.state.image} onChange={this.handleInputImage}/>
+					<input className="u-full-width" type="file"  onChange={this.handleInputImage}/>
 				</div>
 
 				<div>
