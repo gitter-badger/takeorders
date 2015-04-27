@@ -97,11 +97,7 @@ var formLogin = React.createClass({
 	displayName: 'formLogin',
 
 	getInitialState: function getInitialState() {
-		return {
-			email: '',
-			pass: '',
-			logueo: ''
-		};
+		return {};
 	},
 
 	handleInputEmail: function handleInputEmail(event) {
@@ -187,10 +183,7 @@ var FormProducts = React.createClass({
 	displayName: 'FormProducts',
 
 	getInitialState: function getInitialState() {
-		return {
-			name: '',
-			desc: '',
-			brand: '' };
+		return {};
 	},
 	componentDidMount: function componentDidMount() {
 		this.setState({ name: this.props.product.name });
@@ -411,12 +404,6 @@ var FormProducts = React.createClass({
 });
 
 module.exports = FormProducts;
-
-// name: '',
-// desc: '',
-// brand: '',
-// total: '',
-// image: {}
 // console.log(ev.target.files[0])
 
 },{"../libs/products.js":10,"react":197}],5:[function(require,module,exports){
@@ -431,11 +418,7 @@ var formLogin = React.createClass({
 	displayName: 'formLogin',
 
 	getInitialState: function getInitialState() {
-		return {
-			email: '',
-			pass: '',
-			verify: ''
-		};
+		return {};
 	},
 
 	handleInputEmail: function handleInputEmail(event) {
