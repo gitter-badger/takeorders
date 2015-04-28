@@ -2,6 +2,7 @@ var React = require('react');
 var page = require('page');
 var Server = require('./libs/auth.js');
 
+
 page('/', function () {
 	var hello = require('./pages/landing.jsx');
 	React.render(hello(), content);
@@ -23,7 +24,6 @@ page('/admin', function (ctx) {
 		if (err) {
 			console.log(err)
 			page('/');
-			
 		} else {
 			React.render(admin({email: res.body.email}), content);
 		}
