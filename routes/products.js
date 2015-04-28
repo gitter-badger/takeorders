@@ -1,13 +1,13 @@
+var mongoose = require('mongoose');
 var express = require('express');
-var router = express.Router();
+var JWT = require('jwt-async');
 
 var Products = require('../models/products.js');
 var User = require('../models/user.js');
 
-var mongoose = require('mongoose');
+var router = express.Router();
 var Schema = mongoose.Schema;
 
-var JWT = require('jwt-async');
 var jwt = new JWT({
 	crypto: {
 		algorithm: 'HS512',
@@ -64,14 +64,13 @@ router.get('/products/:id', requireToken, function (req, res) {
 		})
 	});
 });
-router.post('/image', function (req, res) {
-	console.log(req.body)
-	console.log(req.files)
-})
-router.post('/products', requireToken, function (req, res) {
 
-	console.log(req.body)
-	console.log(req.files)
+router.post('/image', function (req, res) {
+  console.log(req.body)
+  console.log(req.files)
+});
+
+router.post('/products', requireToken, function (req, res) {
 
 	var products = new Products({
 		user: req.user._id,
@@ -87,17 +86,15 @@ router.post('/products', requireToken, function (req, res) {
 		if (err) {
 			console.log(err)
 			err.status = 500;
-      		return res.status(500).send(err);
-		}
-		console.log('Guardado ok')
-		return res.send([req.body]);
-	});
+      return res.status(500).send(err);
+    }
+    console.log('Guardado ok')
+    return res.send([req.body]);
+  });
 
 });
 
 router.put('/products/:id', requireToken, function (req, res) {
-
-
 	Products.findOne({_id: req.params.id}, function (err, pro) {
 		pro.user = req.user._id;
 		pro.name = req.body.name;
@@ -109,13 +106,11 @@ router.put('/products/:id', requireToken, function (req, res) {
 			if (err) {
 				console.log(err)
 				err.status = 500;
-	      		return res.status(500).send(err);
-			}
-			res.send([pro]);
-		})
+       return res.status(500).send(err);
+     }
+     res.send([pro]);
+   })
 	})
-
-
 });
 
 
@@ -125,11 +120,11 @@ router.delete('/products/:id', requireToken, function (req, res) {
 		if (err) {
 			console.log(err)
 			err.status = 500;
-      		return res.status(500).send(err);
-		}
-		console.log('borrado ok');
-		res.send([{_id: req.params.id}])
-	})
+      return res.status(500).send(err);
+    }
+    console.log('borrado ok');
+    res.send([{_id: req.params.id}])
+  })
 });
 
 

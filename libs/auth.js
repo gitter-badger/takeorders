@@ -1,16 +1,14 @@
-/**
- * This includes auth-related API endpoints
- */
+var bodyParser = require('body-parser');
+var express = require('express');
+var JWT = require('jwt-async');
 
-var express = require('express'),
-  JWT = require('jwt-async'),
-  bodyParser = require('body-parser'),
-  urlParse = bodyParser.urlencoded({extended:true}),
-  User = require('../models/user.js'),
-  Verify = require('../models/verify.js'),
-  jsonParse = bodyParser.json();
+var User = require('../models/user.js');
+var Verify = require('../models/verify.js');
 
-var auth = module.exports = express();
+var jsonParse = bodyParser.json();
+var urlParse = bodyParser.urlencoded({extended:true});
+
+var auth = module.exports = express.Router();
 
 var jwt = new JWT({
   crypto: {
