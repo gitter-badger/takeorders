@@ -28,7 +28,6 @@ router.get('/products/:id', auth.requireToken, function (req, res) {
 				err.status = 500;
 				return res.status(500).send(err);
 			}
-			console.log(prods)
 			res.send(prods)
 		})
 	});
@@ -74,14 +73,12 @@ router.put('/products/:id', auth.requireToken, function (req, res) {
 
 
 router.delete('/products/:id', auth.requireToken, function (req, res) {
-	console.log(req.params.id)
 	Products.remove({_id: req.params.id}, function (err, pro) {
 		if (err) {
 			console.log(err)
 			err.status = 500;
       return res.status(500).send(err);
     }
-    console.log('borrado ok');
     res.send([{_id: req.params.id}])
   })
 });

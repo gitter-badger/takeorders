@@ -76,13 +76,13 @@ auth.post('/login', [urlParse, jsonParse], function(req, res){
 
 // register new login credentials
 auth.post('/register', [urlParse, jsonParse], function(req, res){
-	console.log(req.body)
+
 
   var user = new User({
     email: req.body.email,
     password: req.body.password
   });
-  console.log(user)
+
 
   user.save(function(err, u){
     if (err){
@@ -92,10 +92,6 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
 
     var verify = new Verify({user: user});
     verify.save();
-
-    // TODO: implement a user email here
-
-    console.log('User ' + user.email + ' signed up. Verify with /verify/' + verify.code);
 
     return res.send({'verify':verify.code});
   });
