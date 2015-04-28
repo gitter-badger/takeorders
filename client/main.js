@@ -23,6 +23,7 @@ page('/admin', function (ctx) {
 		if (err) {
 			console.log(err)
 			page('/');
+			
 		} else {
 			React.render(admin({email: res.body.email}), content);
 		}
