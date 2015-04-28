@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
 var Email = require('mongoose-type-email');
+var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     email: {type: Email, required:true, unique:true},

@@ -1,16 +1,14 @@
-/**
- * This includes auth-related API endpoints
- */
+var bodyParser = require('body-parser');
+var express = require('express');
+var JWT = require('jwt-async');
 
-var express = require('express'),
-  JWT = require('jwt-async'),
-  bodyParser = require('body-parser'),
-  urlParse = bodyParser.urlencoded({extended:true}),
-  User = require('../models/user.js'),
-  Verify = require('../models/verify.js'),
-  jsonParse = bodyParser.json();
+var User = require('../models/user.js');
+var Verify = require('../models/verify.js');
 
-var auth = module.exports = express();
+var jsonParse = bodyParser.json();
+var urlParse = bodyParser.urlencoded({extended:true});
+
+var auth = module.exports = express.Router();
 
 var jwt = new JWT({
   crypto: {
@@ -78,13 +76,13 @@ auth.post('/login', [urlParse, jsonParse], function(req, res){
 
 // register new login credentials
 auth.post('/register', [urlParse, jsonParse], function(req, res){
-	console.log(req.body)
+
 
   var user = new User({
     email: req.body.email,
     password: req.body.password
   });
-  console.log(user)
+
 
   user.save(function(err, u){
     if (err){
@@ -94,10 +92,6 @@ auth.post('/register', [urlParse, jsonParse], function(req, res){
 
     var verify = new Verify({user: user});
     verify.save();
-
-    // TODO: implement a user email here
-
-    console.log('User ' + user.email + ' signed up. Verify with /verify/' + verify.code);
 
     return res.send({'verify':verify.code});
   });

@@ -5,7 +5,6 @@ var mongo_url = process.env.MONGO_URI ||  'mongodb://takeorders:takeorders@ds061
 
 if (!mongo_url) {
 	mockgoose(mongoose);
-	//mockgoose.reset();
 	mongo_url = 'mongodb://localhost/hola';
 }
 
