@@ -1,12 +1,13 @@
-var React = require('react/addons');
+const React = require('react/addons');
 
-var ReactTransitionGroup = React.addons.CSSTransitionGroup;
+const NavbarSide = require('../components/navbar-side.jsx');
+const Navbar = require('../components/navbar.jsx');
+const Server = require('../libs/auth.js');
 
-var Server = require('../libs/auth.js');
-var Navbar = require('../components/navbar.jsx');
-var NavbarSide = require('../components/navbar-side.jsx');
+const ReactTransitionGroup = React.addons.CSSTransitionGroup;
 
-var MyView = React.createClass({
+var admin = React.createClass({
+
 	getInitialState: function () {
 
 			return {
@@ -16,9 +17,8 @@ var MyView = React.createClass({
 	logout: function () {
 		Server.logout();
 	},
-	render: function () {
+	render: () => {
 		return (
-
 			<div>
 				<Navbar email={this.props.email}/>
 			<div className="contenedor">
@@ -37,7 +37,7 @@ var MyView = React.createClass({
 	}
 });
 
-module.exports = React.createFactory(MyView);
+module.exports = React.createFactory(admin);
 
 
 

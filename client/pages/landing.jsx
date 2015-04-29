@@ -1,29 +1,29 @@
-var React = require('react');
+const React = require('react');
 
-var Navbar = require('../components/navbar.jsx');
-var FormLogin = require('../components/form-login.jsx');
-var FormRegister = require('../components/form-register.jsx');
+const FormRegister = require('../components/form-register.jsx');
+const FormLogin = require('../components/form-login.jsx');
+const Navbar = require('../components/navbar.jsx');
 
-var MyView = React.createClass({
+var landing = React.createClass({
   render: () => {
     return (
     	<div>
-		<Navbar />
-      <div className="row">
+  		<Navbar />
         <div className="row">
-			<div className="six columns">
-				<h3>Login</h3>
-				<FormLogin />
-			</div>
-			<div className="six columns">
-				<h3>Register</h3>
-				<FormRegister />
-			</div>
+          <div className="row">
+  			<div className="six columns">
+  				<h3>Login</h3>
+  				<FormLogin />
+  			</div>
+  			<div className="six columns">
+  				<h3>Register</h3>
+  				<FormRegister />
+  			</div>
+          </div>
         </div>
-      </div>
       </div>
     );
   }
 });
 
-module.exports = React.createFactory(MyView);
+module.exports = React.createFactory(landing);
