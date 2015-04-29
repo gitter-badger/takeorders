@@ -19,6 +19,7 @@ page('/admin', function (ctx) {
 		if (err) {
 			page('/');
 		} else {
+      console.log(res.body)
 			React.render(admin({email: res.body.email}), content);
 		}
 	})

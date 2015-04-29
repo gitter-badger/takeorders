@@ -12,7 +12,7 @@ var table = React.createClass({
 			products: [{}]
 	    };
 	},
-	componentDidMount: function() {
+	componentWillMount: function() {
 		Products.getAll((err, data) => {
 
 			this.setState({products: data.body})

@@ -17,7 +17,7 @@ var admin = React.createClass({
 	logout: function () {
 		Server.logout();
 	},
-	render: () => {
+	render: function () {
 		return (
 			<div>
 				<Navbar email={this.props.email}/>

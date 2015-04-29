@@ -5,10 +5,10 @@ var page = require('page')
 var FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
-		
+
 	    };
 	},
-	componentDidMount: function() {
+	componentWillMount: function() {
 		this.setState({name: this.props.product.name});
 		this.setState({desc: this.props.product.desc});
 		this.setState({brand: this.props.product.brand});
@@ -53,7 +53,7 @@ var FormProducts = React.createClass({
 					<label>Nombre</label>
 					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
 				</div>
-				
+
 				<div>
 					<label>Marca</label>
 					<input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>

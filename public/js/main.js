@@ -22,6 +22,7 @@ page('/admin', function (ctx) {
 		if (err) {
 			page('/');
 		} else {
+			console.log(res.body);
 			React.render(admin({ email: res.body.email }), content);
 		}
 	});
@@ -175,7 +176,7 @@ var FormProducts = React.createClass({
 	getInitialState: function getInitialState() {
 		return {};
 	},
-	componentDidMount: function componentDidMount() {
+	componentWillMount: function componentWillMount() {
 		this.setState({ name: this.props.product.name });
 		this.setState({ desc: this.props.product.desc });
 		this.setState({ brand: this.props.product.brand });
@@ -639,7 +640,7 @@ var table = React.createClass({
 			products: [{}]
 		};
 	},
-	componentDidMount: function componentDidMount() {
+	componentWillMount: function componentWillMount() {
 		var _this = this;
 
 		Products.getAll(function (err, data) {
@@ -970,7 +971,7 @@ var admin = React.createClass({
 		return React.createElement(
 			'div',
 			null,
-			React.createElement(Navbar, { email: undefined.props.email }),
+			React.createElement(Navbar, { email: this.props.email }),
 			React.createElement(
 				'div',
 				{ className: 'contenedor' },
@@ -989,11 +990,11 @@ var admin = React.createClass({
 						React.createElement(
 							'p',
 							null,
-							undefined.props.email
+							this.props.email
 						),
 						React.createElement(
 							'button',
-							{ onClick: undefined.logout },
+							{ onClick: this.logout },
 							'Logout'
 						)
 					)
