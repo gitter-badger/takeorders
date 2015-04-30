@@ -1122,13 +1122,6 @@ var FormProducts = require('../components/form-products.jsx');
 var MyView = React.createClass({
 	displayName: 'MyView',
 
-	getInitialState: function getInitialState() {
-
-		return {};
-	},
-	logout: function logout() {
-		Server.logout();
-	},
 	render: function render() {
 		return React.createElement(
 			'div',
