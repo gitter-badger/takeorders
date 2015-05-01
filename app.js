@@ -8,7 +8,6 @@ var routeProducts = require('./routes/products.js');
 // Se llama a la ruta que permite el login
 var auth = require('./libs/auth.js');
 
-
 app.use('/auth', auth);
 app.use(routeProducts);
 

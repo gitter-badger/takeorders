@@ -14,7 +14,6 @@ var table = React.createClass({
 	},
 	componentWillMount: function() {
 		Products.getAll((err, data) => {
-
 			this.setState({products: data.body})
 		})
 	},
