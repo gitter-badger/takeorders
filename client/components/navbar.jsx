@@ -4,7 +4,7 @@ var navbar = React.createClass({
 
 	getInitialState: function () {
 	    return {
-			usuario: '/usuario/' + this.props.email
+			 usuario: '/usuario/' + this.props.email
 	    };
 	},
 

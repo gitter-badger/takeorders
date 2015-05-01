@@ -4,14 +4,11 @@ var request = require('superagent');
 var Navbar = require('../components/navbar.jsx');
 
 var MyView = React.createClass({
-	getInitialState: function () {
+	componentWillMount: function () {
 	    request.get('/auth/verify/' + this.props.code).end((err, res) => {
         console.log(err)
         console.log(res)
       })
-	    return {
-
-	    };
 	},
   render: function () {
     return (

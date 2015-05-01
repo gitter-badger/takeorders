@@ -1121,13 +1121,6 @@ var FormProducts = require('../components/form-products.jsx');
 var MyView = React.createClass({
 	displayName: 'MyView',
 
-	getInitialState: function getInitialState() {
-
-		return {};
-	},
-	logout: function logout() {
-		Server.logout();
-	},
 	render: function render() {
 		return React.createElement(
 			'div',
@@ -1275,12 +1268,11 @@ var Navbar = require('../components/navbar.jsx');
 var MyView = React.createClass({
   displayName: 'MyView',
 
-  getInitialState: function getInitialState() {
+  componentWillMount: function componentWillMount() {
     request.get('/auth/verify/' + this.props.code).end(function (err, res) {
       console.log(err);
       console.log(res);
     });
-    return {};
   },
   render: function render() {
     return React.createElement(
