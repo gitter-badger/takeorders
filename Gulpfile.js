@@ -1,11 +1,11 @@
-var browserify = require('browserify');
-var gulp = require('gulp');
 var source = require("vinyl-source-stream");
-var reactify = require('reactify');
-var babel = require('gulp-babel');
-var babelify = require("babelify");
+var browserify = require('browserify');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
+var reactify = require('reactify');
+var babelify = require("babelify");
+var babel = require('gulp-babel');
+var gulp = require('gulp');
 
 gulp.task('browserify', function(){
   var b = browserify();
