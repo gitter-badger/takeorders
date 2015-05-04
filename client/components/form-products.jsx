@@ -5,15 +5,15 @@ var Products = require('../libs/products.js');
 var FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
-			
+
 	    };
 	},
 	newProducts : function () {
 		event.preventDefault();
 
-		var obj = {	name: this.state.name, 
-					desc: this.state.desc, 
-					total: this.state.total, 
+		var obj = {	name: this.state.name,
+					desc: this.state.desc,
+					total: this.state.total,
 					brand: this.state.brand,
 					image: this.state.image
 				};
@@ -22,7 +22,7 @@ var FormProducts = React.createClass({
 
 			console.log(err)
 			}
-			
+
 			this.setState({name: ''});
 			this.setState({desc: ''});
 			this.setState({brand: ''});
@@ -45,6 +45,15 @@ var FormProducts = React.createClass({
 	},
 	handleInputImage: function (ev) {
 		this.setState({image: ev.target.files[0]})
+    if ( ev.target.files && ev.target.files[0] ) {
+        var FR = new FileReader();
+        FR.onload = function(e) {
+             document.getElementById("imagePreview").src = e.target.result;
+        };
+        FR.readAsDataURL( ev.target.files[0] );
+    }
+
+
 		// console.log(ev.target.files[0])
 	},
    	render: function () {
@@ -54,7 +63,7 @@ var FormProducts = React.createClass({
 					<label>Nombre</label>
 					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
 				</div>
-				
+
 				<div>
 					<label>Marca</label>
 					<input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>
@@ -74,6 +83,10 @@ var FormProducts = React.createClass({
 					<label htmlFor="pass">Imagen</label>
 					<input className="u-full-width" type="file"  onChange={this.handleInputImage}/>
 				</div>
+
+        <div>
+          <img id="imagePreview" src="" alt="" />
+        </div>
 
 				<div>
 					<input className="button-primary" type="submit" value="Agregar" onClick={this.newProducts}/>

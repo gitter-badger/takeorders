@@ -329,6 +329,15 @@ var FormProducts = React.createClass({
 	},
 	handleInputImage: function handleInputImage(ev) {
 		this.setState({ image: ev.target.files[0] });
+		if (ev.target.files && ev.target.files[0]) {
+			var FR = new FileReader();
+			FR.onload = function (e) {
+				document.getElementById('imagePreview').src = e.target.result;
+			};
+			FR.readAsDataURL(ev.target.files[0]);
+		}
+
+		// console.log(ev.target.files[0])
 	},
 	render: function render() {
 		return React.createElement(
@@ -387,6 +396,11 @@ var FormProducts = React.createClass({
 			React.createElement(
 				'div',
 				null,
+				React.createElement('img', { id: 'imagePreview', src: '', alt: '' })
+			),
+			React.createElement(
+				'div',
+				null,
 				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Agregar', onClick: this.newProducts })
 			),
 			React.createElement('div', null)
@@ -395,7 +409,6 @@ var FormProducts = React.createClass({
 });
 
 module.exports = FormProducts;
-// console.log(ev.target.files[0])
 
 },{"../libs/products.js":10,"react":196}],5:[function(require,module,exports){
 'use strict';
@@ -36092,7 +36105,7 @@ var reduce = require('reduce');
  */
 
 var root = 'undefined' == typeof window
-  ? (this || self)
+  ? this
   : window;
 
 /**
@@ -36131,8 +36144,7 @@ function isHost(obj) {
 
 request.getXHR = function () {
   if (root.XMLHttpRequest
-      && (!root.location || 'file:' != root.location.protocol
-          || !root.ActiveXObject)) {
+    && ('file:' != root.location.protocol || !root.ActiveXObject)) {
     return new XMLHttpRequest;
   } else {
     try { return new ActiveXObject('Microsoft.XMLHTTP'); } catch(e) {}
@@ -36468,11 +36480,6 @@ Response.prototype.parseBody = function(str){
  */
 
 Response.prototype.setStatusProperties = function(status){
-  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
-  if (status === 1223) {
-    status = 204;
-  }
-
   var type = status / 100 | 0;
 
   // status / class
@@ -36490,7 +36497,7 @@ Response.prototype.setStatusProperties = function(status){
 
   // sugar
   this.accepted = 202 == status;
-  this.noContent = 204 == status;
+  this.noContent = 204 == status || 1223 == status;
   this.badRequest = 400 == status;
   this.unauthorized = 401 == status;
   this.notAcceptable = 406 == status;
@@ -36998,18 +37005,12 @@ Request.prototype.end = function(fn){
   };
 
   // progress
-  var handleProgress = function(e){
-    if (e.total > 0) {
-      e.percent = e.loaded / e.total * 100;
-    }
-    self.emit('progress', e);
-  };
-  if (this.hasListeners('progress')) {
-    xhr.onprogress = handleProgress;
-  }
   try {
     if (xhr.upload && this.hasListeners('progress')) {
-      xhr.upload.onprogress = handleProgress;
+      xhr.upload.onprogress = function(e){
+        e.percent = e.loaded / e.total * 100;
+        self.emit('progress', e);
+      };
     }
   } catch(e) {
     // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
