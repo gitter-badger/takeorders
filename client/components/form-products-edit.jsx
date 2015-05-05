@@ -1,8 +1,8 @@
-var React = require('react');
-var Products = require('../libs/products.js');
-var page = require('page')
+const React = require('react');
+const Products = require('../libs/products.js');
+const page = require('page')
 
-var FormProducts = React.createClass({
+const FormProducts = React.createClass({
 	getInitialState: function () {
 	    return {
 
@@ -17,18 +17,17 @@ var FormProducts = React.createClass({
 	editProducts : function () {
 		event.preventDefault();
 
-		var obj = {_id: this.props.product._id,
-					name: this.state.name,
-					desc: this.state.desc,
-					brand: this.state.brand,
-					total: this.state.total};
+		let obj = {_id: this.props.product._id,
+     name: this.state.name,
+     desc: this.state.desc,
+     brand: this.state.brand,
+     total: this.state.total};
 
 					console.log(obj)
 
 		Products.edit(obj, (err, data) => {
 			if (err) {
-
-			console.log(err)
+			 console.log(err)
 			}
 			page('/admin/products');
 		})

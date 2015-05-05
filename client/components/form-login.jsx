@@ -1,10 +1,10 @@
-var React = require('react');
-var page = require('page');
+const React = require('react');
+const page = require('page');
 
-var Server = require('../libs/auth.js');
-var validator = require('../libs/validations.js');
+const Server = require('../libs/auth.js');
+const validator = require('../libs/validations.js');
 
-var formLogin = React.createClass({
+const formLogin = React.createClass({
 
 	getInitialState: function () {
 	    return {

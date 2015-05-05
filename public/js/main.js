@@ -195,7 +195,6 @@ var FormProducts = React.createClass({
 
 		Products.edit(obj, function (err, data) {
 			if (err) {
-
 				console.log(err);
 			}
 			page('/admin/products');
@@ -286,126 +285,130 @@ var React = require('react');
 var Products = require('../libs/products.js');
 
 var FormProducts = React.createClass({
-	displayName: 'FormProducts',
+  displayName: 'FormProducts',
 
-	getInitialState: function getInitialState() {
-		return {};
-	},
-	newProducts: function newProducts() {
-		var _this = this;
+  getInitialState: function getInitialState() {
+    return {};
+  },
+  newProducts: function newProducts() {
+    var _this = this;
 
-		event.preventDefault();
+    event.preventDefault();
 
-		var obj = { name: this.state.name,
-			desc: this.state.desc,
-			total: this.state.total,
-			brand: this.state.brand,
-			image: this.state.image
-		};
-		Products.newProduct(obj, function (err, data) {
-			if (err) {
+    var obj = { name: this.state.name,
+      desc: this.state.desc,
+      total: this.state.total,
+      brand: this.state.brand,
+      image: this.state.image
+    };
+    Products.newProduct(obj, function (err, data) {
+      if (err) {
 
-				console.log(err);
-			}
+        console.log(err);
+      }
 
-			_this.setState({ name: '' });
-			_this.setState({ desc: '' });
-			_this.setState({ brand: '' });
-			_this.setState({ total: '' });
-			_this.setState({ image: null });
-		});
-	},
-	handleInputName: function handleInputName(ev) {
-		this.setState({ name: ev.target.value });
-	},
-	handleInputDesc: function handleInputDesc(ev) {
-		this.setState({ desc: ev.target.value });
-	},
-	handleInputTotal: function handleInputTotal(ev) {
-		this.setState({ total: ev.target.value });
-	},
-	handleInputBrand: function handleInputBrand(ev) {
-		this.setState({ brand: ev.target.value });
-	},
-	handleInputImage: function handleInputImage(ev) {
-		this.setState({ image: ev.target.files[0] });
-		if (ev.target.files && ev.target.files[0]) {
-			var FR = new FileReader();
-			FR.onload = function (e) {
-				document.getElementById('imagePreview').src = e.target.result;
-			};
-			FR.readAsDataURL(ev.target.files[0]);
-		}
+      _this.setState({ name: '' });
+      _this.setState({ desc: '' });
+      _this.setState({ brand: '' });
+      _this.setState({ total: '' });
+      _this.setState({ image: null });
+      document.getElementById('imagePreview').src = null;
+      document.getElementById('imagePreview').setAttribute('style', 'display: none');
+    });
+  },
+  handleInputName: function handleInputName(ev) {
+    this.setState({ name: ev.target.value });
+  },
+  handleInputDesc: function handleInputDesc(ev) {
+    this.setState({ desc: ev.target.value });
+  },
+  handleInputTotal: function handleInputTotal(ev) {
+    this.setState({ total: ev.target.value });
+  },
+  handleInputBrand: function handleInputBrand(ev) {
+    this.setState({ brand: ev.target.value });
+  },
+  handleInputImage: function handleInputImage(ev) {
+    this.setState({ image: ev.target.files[0] });
+    if (ev.target.files && ev.target.files[0]) {
+      var FR = new FileReader();
+      FR.onload = function (e) {
 
-		// console.log(ev.target.files[0])
-	},
-	render: function render() {
-		return React.createElement(
-			'form',
-			null,
-			React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'label',
-					null,
-					'Nombre'
-				),
-				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'label',
-					null,
-					'Marca'
-				),
-				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.brand, onChange: this.handleInputBrand })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'label',
-					null,
-					'Descripcion'
-				),
-				React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.desc, onChange: this.handleInputDesc })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'label',
-					null,
-					'Cantidad'
-				),
-				React.createElement('input', { className: 'u-full-width', type: 'number', value: this.state.total, onChange: this.handleInputTotal })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement(
-					'label',
-					{ htmlFor: 'pass' },
-					'Imagen'
-				),
-				React.createElement('input', { className: 'u-full-width', type: 'file', onChange: this.handleInputImage })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement('img', { id: 'imagePreview', src: '', alt: '' })
-			),
-			React.createElement(
-				'div',
-				null,
-				React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Agregar', onClick: this.newProducts })
-			),
-			React.createElement('div', null)
-		);
-	}
+        document.getElementById('imagePreview').setAttribute('style', 'display:');
+        document.getElementById('imagePreview').src = e.target.result;
+      };
+      FR.readAsDataURL(ev.target.files[0]);
+    }
+
+    // console.log(ev.target.files[0])
+  },
+  render: function render() {
+    return React.createElement(
+      'form',
+      null,
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'label',
+          null,
+          'Nombre'
+        ),
+        React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.name, onChange: this.handleInputName })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'label',
+          null,
+          'Marca'
+        ),
+        React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.brand, onChange: this.handleInputBrand })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'label',
+          null,
+          'Descripcion'
+        ),
+        React.createElement('input', { className: 'u-full-width', type: 'text', value: this.state.desc, onChange: this.handleInputDesc })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'label',
+          null,
+          'Cantidad'
+        ),
+        React.createElement('input', { className: 'u-full-width', type: 'number', value: this.state.total, onChange: this.handleInputTotal })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'label',
+          { htmlFor: 'pass' },
+          'Imagen'
+        ),
+        React.createElement('input', { className: 'u-full-width', type: 'file', onChange: this.handleInputImage })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement('img', { id: 'imagePreview', src: '', alt: '' })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement('input', { className: 'button-primary', type: 'submit', value: 'Agregar', onClick: this.newProducts })
+      ),
+      React.createElement('div', null)
+    );
+  }
 });
 
 module.exports = FormProducts;

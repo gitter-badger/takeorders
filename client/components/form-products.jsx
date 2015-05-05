@@ -3,97 +3,101 @@ var Products = require('../libs/products.js');
 
 
 var FormProducts = React.createClass({
-	getInitialState: function () {
-	    return {
+  getInitialState: function () {
+      return {
 
-	    };
-	},
-	newProducts : function () {
-		event.preventDefault();
+      };
+  },
+  newProducts : function () {
+    event.preventDefault();
 
-		var obj = {	name: this.state.name,
-					desc: this.state.desc,
-					total: this.state.total,
-					brand: this.state.brand,
-					image: this.state.image
-				};
-		Products.newProduct(obj, (err, data) => {
-			if (err) {
+    var obj = { name: this.state.name,
+          desc: this.state.desc,
+          total: this.state.total,
+          brand: this.state.brand,
+          image: this.state.image
+        };
+    Products.newProduct(obj, (err, data) => {
+      if (err) {
 
-			console.log(err)
-			}
+      console.log(err)
+      }
 
-			this.setState({name: ''});
-			this.setState({desc: ''});
-			this.setState({brand: ''});
-			this.setState({total: ''});
-			this.setState({image: null})
-		})
+      this.setState({name: ''});
+      this.setState({desc: ''});
+      this.setState({brand: ''});
+      this.setState({total: ''});
+      this.setState({image: null})
+      document.getElementById("imagePreview").src = null;
+      document.getElementById("imagePreview").setAttribute('style', 'display: none');
+    })
 
-	},
-	handleInputName: function (ev) {
-		this.setState({name: ev.target.value})
-	},
-	handleInputDesc: function (ev) {
-		this.setState({desc: ev.target.value})
-	},
-	handleInputTotal: function (ev) {
-		this.setState({total: ev.target.value})
-	},
-	handleInputBrand: function (ev) {
-		this.setState({brand: ev.target.value})
-	},
-	handleInputImage: function (ev) {
-		this.setState({image: ev.target.files[0]})
+  },
+  handleInputName: function (ev) {
+    this.setState({name: ev.target.value})
+  },
+  handleInputDesc: function (ev) {
+    this.setState({desc: ev.target.value})
+  },
+  handleInputTotal: function (ev) {
+    this.setState({total: ev.target.value})
+  },
+  handleInputBrand: function (ev) {
+    this.setState({brand: ev.target.value})
+  },
+  handleInputImage: function (ev) {
+    this.setState({image: ev.target.files[0]})
     if ( ev.target.files && ev.target.files[0] ) {
         var FR = new FileReader();
         FR.onload = function(e) {
-             document.getElementById("imagePreview").src = e.target.result;
+
+            document.getElementById("imagePreview").setAttribute('style', 'display:');
+            document.getElementById("imagePreview").src = e.target.result;
         };
         FR.readAsDataURL( ev.target.files[0] );
     }
 
 
-		// console.log(ev.target.files[0])
-	},
-   	render: function () {
+    // console.log(ev.target.files[0])
+  },
+    render: function () {
         return (
             <form>
-				<div>
-					<label>Nombre</label>
-					<input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
-				</div>
+        <div>
+          <label>Nombre</label>
+          <input className="u-full-width" type="text" value={this.state.name} onChange={this.handleInputName}/>
+        </div>
 
-				<div>
-					<label>Marca</label>
-					<input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>
-				</div>
+        <div>
+          <label>Marca</label>
+          <input className="u-full-width" type="text" value={this.state.brand} onChange={this.handleInputBrand}/>
+        </div>
 
-				<div>
-					<label>Descripcion</label>
-					<input className="u-full-width" type="text" value={this.state.desc} onChange={this.handleInputDesc} />
-				</div>
+        <div>
+          <label>Descripcion</label>
+          <input className="u-full-width" type="text" value={this.state.desc} onChange={this.handleInputDesc} />
+        </div>
 
-				<div>
-					<label>Cantidad</label>
-					<input className="u-full-width" type="number" value={this.state.total} onChange={this.handleInputTotal} />
-				</div>
+        <div>
+          <label>Cantidad</label>
+          <input className="u-full-width" type="number" value={this.state.total} onChange={this.handleInputTotal} />
+        </div>
 
-				<div>
-					<label htmlFor="pass">Imagen</label>
-					<input className="u-full-width" type="file"  onChange={this.handleInputImage}/>
-				</div>
+        <div>
+          <label htmlFor="pass">Imagen</label>
+          <input className="u-full-width" type="file"  onChange={this.handleInputImage}/>
+        </div>
 
         <div>
           <img id="imagePreview" src="" alt="" />
         </div>
 
-				<div>
-					<input className="button-primary" type="submit" value="Agregar" onClick={this.newProducts}/>
-				</div>
-				<div>
-				</div>
-			</form>
+        <div>
+          <input className="button-primary" type="submit" value="Agregar" onClick={this.newProducts}/>
+        </div>
+        <div>
+        </div>
+      </form>
         );
     }
 });
